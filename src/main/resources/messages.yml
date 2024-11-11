@@ -1,0 +1,13 @@
+join_message: "&aYou have joined the queue for the next round of Huntail Hunter!"
+game_starting: "&aHuntail Hunters will be starting soon. Get ready!"
+round_start: "&aRound {round} has begun! Good luck everyone!"
+last_round: "&aThat was our last round of Huntail Hunters. Hope everyone had a fun!"
+force_stop: "&cThe game has forcibly been stopped by staff!"
+power_ups_enabled: "&aPower ups are enabled for this round."
+power_ups_disabled: "&aPower ups are disabled for this round."
+power_up_spawned: "&aA &6Power up&f has spawned nearby!"
+power_up_recieved: "&aYou have received a {power_up} power up!"
+winner_announcement: "&aCongratulations &b&l{winner}&f&a, you have won the round!"
+delete_confirmed: "&cArena {arena} has been deleted successfully."
+delete_cancelled: "&aArena deletion has been cancelled"
+

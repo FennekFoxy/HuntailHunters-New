@@ -1,0 +1,10 @@
+name: HuntailHunters
+version: 1.0
+author: FennekFoxy
+main: com.fennekfoxy.huntailhunters.HuntailHunters
+api-version: 1.16
+commands:
+  HuntailHunters:
+    description: Huntail Hunters event
+    usage: /huntailhunters <subcommand>
+    aliases: hh
