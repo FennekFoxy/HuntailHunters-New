@@ -1,6 +1,7 @@
 package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
+import com.fennekfoxy.huntailhunters.HuntailHunters;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

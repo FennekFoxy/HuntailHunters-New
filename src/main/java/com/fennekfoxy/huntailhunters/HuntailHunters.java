@@ -10,9 +10,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class HuntailHunters extends JavaPlugin {
 
+    private static HuntailHunters plugin;
+
     @Override
     public void onEnable() {
-
+        plugin = this;
         getServer().getPluginManager().registerEvents(new PlayerConsumeEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerKilledEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerShootEvent(), this);
@@ -27,5 +29,9 @@ public class HuntailHunters extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info(ChatColor.RED + "HuntailHunters (version " + getDescription().getVersion() + ") has been disabled");
+    }
+
+    public static HuntailHunters getPlugin() {
+        return plugin;
     }
 }

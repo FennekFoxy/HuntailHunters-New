@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.Events;
 
+
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;

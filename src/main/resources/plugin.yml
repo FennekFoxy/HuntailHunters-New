@@ -4,7 +4,13 @@ author: FennekFoxy
 main: com.fennekfoxy.huntailhunters.HuntailHunters
 api-version: 1.16
 commands:
-  HuntailHunters:
+  huntailhunters:
     description: Huntail Hunters event
     usage: /huntailhunters <subcommand>
     aliases: hh
+permissions:
+  huntailhunters.use:
+    description: Allowes use of the /huntailhunters command
+    default: true
+    children:
+      huntailhunters.join: true
