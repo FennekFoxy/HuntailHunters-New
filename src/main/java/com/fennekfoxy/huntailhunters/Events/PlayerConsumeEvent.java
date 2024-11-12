@@ -17,6 +17,7 @@ public class PlayerConsumeEvent implements Listener {
     public void onPlayerConsume(PlayerItemConsumeEvent e) {
 
         if (1==1/*Player is in the active arena && is in the join queue && the item has the meta/nbt data of the power up*/){
+            //check if meta/nbt matches the power up && if theres an active game && the player is in the arena
             Player player = e.getPlayer();
             Random random = new Random();
             int number = random.nextInt(3);
