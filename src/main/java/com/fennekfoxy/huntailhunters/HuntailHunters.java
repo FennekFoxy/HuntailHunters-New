@@ -15,6 +15,8 @@ public class HuntailHunters extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new PlayerConsumeEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerKilledEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerShootEvent(), this);

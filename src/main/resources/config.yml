@@ -1,7 +1,7 @@
 power_ups:
   speed:
-    Duraction: 600
-    Amplifier: 1
+    duraction: 600
+    amplifier: 1
   jump_boost:
-    Duration: 600
-    Amplifier: 1
+    duration: 600
+    amplifier: 1
