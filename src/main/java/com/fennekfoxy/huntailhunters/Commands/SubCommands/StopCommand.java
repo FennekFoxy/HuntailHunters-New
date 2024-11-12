@@ -27,6 +27,7 @@ public class StopCommand extends SubCommand {
         }else{
             player.sendMessage("§cYou do not have permission to use this command.");
         }
-
+        //set active game to false and disabled all event functions
+        //get all players from joined list and remove all 3 event items
     }
 }

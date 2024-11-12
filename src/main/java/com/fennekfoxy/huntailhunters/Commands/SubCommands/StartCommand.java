@@ -27,6 +27,9 @@ public class StartCommand extends SubCommand {
         }else{
             player.sendMessage("§cYou do not have permission to use this command.");
         }
-
+        //teleport all players in the join queue to the arena
+        //look into listening for a server done event or add a delay to the teleport
+        //look through all inventorys of the players that are teleported and make sure they have at least 3 empty inventory slots
+        //if not advise them to make room
     }
 }
