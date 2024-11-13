@@ -1,9 +1,17 @@
 package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
+import com.fennekfoxy.huntailhunters.GameManager;
 import org.bukkit.entity.Player;
 
 public class RoundCommand extends SubCommand {
+
+    private GameManager gameManager;
+
+    public GameManager getGameManager(){
+        return gameManager;
+    }
+
     @Override
     public String getName() {
         return "round";
@@ -22,7 +30,7 @@ public class RoundCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if(player.hasPermission("huntailhunters.round")){
-
+            gameManager.setActiveGame(true);
             player.sendMessage("§a");
         }else{
             player.sendMessage("§cYou do not have permission to use this command.");

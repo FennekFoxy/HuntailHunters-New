@@ -19,7 +19,6 @@ public class StartCommand extends SubCommand {
         return gameManager;
     }
 
-
     @Override
     public String getName() {
         return "start";
