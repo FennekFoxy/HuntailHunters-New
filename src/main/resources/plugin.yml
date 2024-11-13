@@ -9,7 +9,7 @@ commands:
     usage: /huntailhunters <subcommand>
     aliases: hh
 permissions:
-  huntailhunters.use:
+  huntailhunters:
     description: Allowes use of the /huntailhunters command
     default: true
     children:

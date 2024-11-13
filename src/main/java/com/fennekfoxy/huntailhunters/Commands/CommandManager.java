@@ -1,6 +1,7 @@
 package com.fennekfoxy.huntailhunters.Commands;
 
-import com.fennekfoxy.huntailhunters.Commands.SubCommands.JoinCommand;
+import com.fennekfoxy.huntailhunters.Commands.SubCommands.*;
+import com.fennekfoxy.huntailhunters.HuntailHunters;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,8 +12,17 @@ public class CommandManager implements CommandExecutor {
 
     private ArrayList<SubCommand> subcommands = new ArrayList<>();
 
+
     public CommandManager(){
+        subcommands.add(new CreateCommand());
+        subcommands.add(new DeleteCommand());
         subcommands.add(new JoinCommand());
+        subcommands.add(new PowerUpCommand());
+        subcommands.add(new RoundCommand());
+        subcommands.add(new SpawnCommand());
+        subcommands.add(new StartCommand());
+        subcommands.add(new StatsCommand());
+        subcommands.add(new StopCommand());
     }
 
     @Override

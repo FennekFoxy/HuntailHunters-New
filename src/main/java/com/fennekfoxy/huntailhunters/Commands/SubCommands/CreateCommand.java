@@ -28,8 +28,8 @@ public class CreateCommand extends SubCommand {
         if(player.hasPermission("huntailhunters.create")){
             try {
                 String name = args[7];
-                Location loc1 = new Location(Bukkit.getWorld("world"), + Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
-                Location loc2 = new Location(Bukkit.getWorld("world"), + Double.parseDouble(args[4]), Double.parseDouble(args[5]), Double.parseDouble(args[6]));
+                Location loc1 = new Location(Bukkit.getWorld("world"), + Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+                Location loc2 = new Location(Bukkit.getWorld("world"), + Integer.parseInt(args[4]), Integer.parseInt(args[5]), Integer.parseInt(args[6]));
                 //save to Arenas config
                 player.sendMessage("§aArena " + name + "§a created successfully.");
 

@@ -23,7 +23,6 @@ public class HuntailHunters extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerShotEvent(), this);
 
         GameItems.init();
-
         getCommand("huntailhunters").setExecutor(new CommandManager());
         getLogger().info(ChatColor.AQUA + "HuntailHunters (version " + getDescription().getVersion() + ") loaded successfully");
     }

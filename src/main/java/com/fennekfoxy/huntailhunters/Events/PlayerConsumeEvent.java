@@ -6,6 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -15,9 +17,10 @@ public class PlayerConsumeEvent implements Listener {
 
     @EventHandler
     public void onPlayerConsume(PlayerItemConsumeEvent e) {
-
-        if (1==1/*Player is in the active arena && is in the join queue && the item has the meta/nbt data of the power up*/){
-            //check if meta/nbt matches the power up && if theres an active game && the player is in the arena
+        ItemStack consumedItem = e.getItem();
+        ItemMeta meta = consumedItem.getItemMeta();
+        if (meta != null && meta.hasDisplayName() && meta.getDisplayName().equals("§6Power-Up"))/*Player is in the active arena && is in the join queue && the item has the meta/nbt data of the power up*/{
+            //check if meta/nbt matches the power up && if there's an active game && the player is in the arena
             Player player = e.getPlayer();
             Random random = new Random();
             int number = random.nextInt(3);

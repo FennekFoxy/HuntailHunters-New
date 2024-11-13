@@ -1,9 +1,16 @@
 package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
+import com.fennekfoxy.huntailhunters.GameManager;
 import org.bukkit.entity.Player;
 
 public class JoinCommand extends SubCommand {
+
+    private GameManager gameManager;
+
+    public GameManager getGameManager(){
+        return gameManager;
+    }
 
     @Override
     public String getName() {
@@ -23,7 +30,7 @@ public class JoinCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if(player.hasPermission("huntailhunters.join")){
-            //add player to join list here
+            gameManager.addPlayerToQueue(player);
             player.sendMessage("§aYou have joined the queue for the next round of Huntail Hunter!");
         }else{
             player.sendMessage("§cYou do not have permission to use this command.");
