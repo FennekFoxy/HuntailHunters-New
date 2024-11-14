@@ -19,11 +19,8 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Random;
 
 public class PlayerConsumeEvent implements Listener {
-    private GameManager gameManager;
 
-    public GameManager getGameManager(){
-        return gameManager;
-    }
+    GameManager gameManager = new GameManager();
 
     @EventHandler
     public void onPlayerConsume(PlayerItemConsumeEvent e) {

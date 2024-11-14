@@ -18,11 +18,8 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class PlayerShootEvent implements Listener {
 
-    private GameManager gameManager;
+    GameManager gameManager = new GameManager();
 
-    public GameManager getGameManager(){
-        return gameManager;
-    }
     @EventHandler
     public void onPlayerShoot(EntityShootBowEvent e) {
         if (e.getEntity() instanceof Player) {

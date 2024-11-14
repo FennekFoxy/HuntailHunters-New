@@ -31,4 +31,6 @@ public class GameManager {
     public ArrayList<Player> getGameQueue() {
         return new ArrayList<>(gameQueue);
     }
+
+    //at the end of each round update player stats of the winner
 }

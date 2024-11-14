@@ -13,11 +13,7 @@ import java.util.ArrayList;
 
 public class StartCommand extends SubCommand {
 
-    private GameManager gameManager;
-
-    public GameManager getGameManager(){
-        return gameManager;
-    }
+    GameManager gameManager = new GameManager();
 
     @Override
     public String getName() {

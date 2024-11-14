@@ -16,11 +16,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class PlayerKilledEvent implements Listener {
 
-    private GameManager gameManager;
-
-    public GameManager getGameManager(){
-        return gameManager;
-    }
+    GameManager gameManager = new GameManager();
 
 
 

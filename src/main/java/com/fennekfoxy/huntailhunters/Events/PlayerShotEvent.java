@@ -16,11 +16,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 public class PlayerShotEvent implements Listener {
-    private GameManager gameManager;
 
-    public GameManager getGameManager() {
-        return gameManager;
-    }
+    GameManager gameManager = new GameManager();
 
     @EventHandler
     public void onPlayerShot(EntityDamageByEntityEvent e) {
