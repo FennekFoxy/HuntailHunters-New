@@ -1,8 +1,10 @@
 package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
+import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,7 +32,8 @@ public class JoinCommand extends SubCommand {
         if(player.hasPermission("huntailhunters.join")){
             gameManager.addPlayerToQueue(player);
 
-            player.sendMessage("§aYou have joined the queue for the next round of Huntail Hunter!");
+            String joinMessage = MessagesConfig.get().getString("join_message");
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', joinMessage));
         }else{
             player.sendMessage("§cYou do not have permission to use this command.");
         }

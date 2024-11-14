@@ -1,6 +1,8 @@
 package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
+import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class ConfirmDeleteCommand extends SubCommand {
@@ -22,7 +24,9 @@ public class ConfirmDeleteCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if(player.hasPermission("huntailhunters.admin.confirmdelete")){
-                        player.sendMessage("§a");
+
+            String confirm = MessagesConfig.get().getString("delete_confirmed");
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', confirm));
         }else{
             player.sendMessage("§cYou do not have permission to use this command.");
         }

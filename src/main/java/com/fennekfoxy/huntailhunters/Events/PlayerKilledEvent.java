@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.Events;
 
+import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
@@ -28,10 +29,11 @@ public class PlayerKilledEvent implements Listener {
         if(gameManager.isActiveGame()/* and both players are in the arean*/){
             e.setDeathMessage(null);
         }
-            if (killer != null && gameManager.isActiveGame() && gameManager.getQueueSize() != 1){
+        if (killer != null && gameManager.isActiveGame()) {
+            if (gameManager.getQueueSize() != 1){
                 ItemStack weapon = killer.getInventory().getItemInMainHand();
                 ItemMeta meta = weapon.getItemMeta();
-                NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "Custom Event Arrow");
+                NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
                 PersistentDataContainer container = meta.getPersistentDataContainer();
                 if (container.has(key, PersistentDataType.INTEGER)){
                     double foundValue = container.get(key, PersistentDataType.INTEGER);
@@ -39,6 +41,11 @@ public class PlayerKilledEvent implements Listener {
                         ItemStack arrow = GameItems.newArrow();
                         killer.getInventory().addItem(arrow);
                     }
+                }else if (gameManager.getQueueSize() == 1)
+                    gameManager.setActiveGame(false);
+                String winner = MessagesConfig.get().getString("winner_announcement");
+                winner = winner.replace("{winner}", killer.getDisplayName());
+                gameManager.announceMessage(MessagesConfig.get().getString(winner));
             }
         }
     }

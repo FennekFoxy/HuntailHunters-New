@@ -1,7 +1,9 @@
 package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
+import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameManager;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class RoundCommand extends SubCommand {
@@ -27,7 +29,10 @@ public class RoundCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if(player.hasPermission("huntailhunters.admin.round")){
             gameManager.setActiveGame(true);
-            player.sendMessage("§a");
+
+            String roundStarting = MessagesConfig.get().getString("round_starting");
+            roundStarting = roundStarting.replace("{round}", args[2]);
+            gameManager.announceMessage(roundStarting);
         }else{
             player.sendMessage("§cYou do not have permission to use this command.");
         }

@@ -8,30 +8,33 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public class MessagesConfig {
+public class ArenasConfig {
     private static File file;
-    private static FileConfiguration messages;
+    private static FileConfiguration arenas;
 
     public static void setup() {
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin("HuntailHunters").getDataFolder(), "messages.yml");
+        file = new File(Bukkit.getServer().getPluginManager().getPlugin("HuntailHunters").getDataFolder(), "arenas.yml");
         if (!file.exists()) {
-            System.out.println("messages.yml could not be found.");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("File could not be created.");
+            }
         }
-        messages = YamlConfiguration.loadConfiguration(file);
+        arenas = YamlConfiguration.loadConfiguration(file);
     }
     public static FileConfiguration get(){
-        return messages;
+        return arenas;
     }
-
     public static void save(){
         try{
-            messages.save(file);
+            arenas.save(file);
         } catch (IOException e) {
             System.out.println("File could not be saved");
         }
     }
 
     public static void reload(){
-        messages = YamlConfiguration.loadConfiguration(file);
+        arenas = YamlConfiguration.loadConfiguration(file);
     }
 }

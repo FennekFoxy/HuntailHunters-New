@@ -1,6 +1,7 @@
 package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
+import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
 import org.bukkit.Material;
@@ -34,6 +35,7 @@ public class StartCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if(player.hasPermission("huntailhunters.admin.start")){
             ArrayList<Player> queue = gameManager.getGameQueue();
+            gameManager.announceMessage(MessagesConfig.get().getString("game_starting"));
             for (Player p : queue) {
                 if (p != null) {
                     // p.teleport(Arena spawn Point);

@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class GameManager {
         return activeGame;
     }
     public void setActiveGame(boolean activeGame){
-        this.activeGame = activeGame;
+        GameManager.activeGame = activeGame;
     }
 
     public void addPlayerToQueue(Player player){
@@ -30,6 +31,10 @@ public class GameManager {
     }
     public ArrayList<Player> getGameQueue() {
         return new ArrayList<>(gameQueue);
+    }
+
+    public void announceMessage(String message) {
+        Bukkit.broadcastMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', message));
     }
 
     //at the end of each round update player stats of the winner

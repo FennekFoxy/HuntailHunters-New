@@ -1,8 +1,10 @@
 package com.fennekfoxy.huntailhunters.Events;
 
+import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -40,15 +42,18 @@ public class PlayerConsumeEvent implements Listener {
                         int duration = HuntailHunters.getPlugin().getConfig().getInt("power_ups.speed.duration", 600);
                         int amplifier = HuntailHunters.getPlugin().getConfig().getInt("power_ups.speed.amplifier", 1);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration, amplifier));
-                        player.sendMessage(/*Messages config messages.speed_boost*/"hi");
+                        String speedBoost = MessagesConfig.get().getString("speed_boost");
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', speedBoost));
                     } else if (number == 1) {
                         int duration = HuntailHunters.getPlugin().getConfig().getInt("power_ups.speed.duration", 600);
                         int amplifier = HuntailHunters.getPlugin().getConfig().getInt("power_ups.speed.amplifier", 1);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, duration, amplifier));
-                        player.sendMessage(/*Messages config messages.jump_boost*/"hi");
+                        String jumpBoost = MessagesConfig.get().getString("jump_boost");
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', jumpBoost));
                     } else if (number == 2) {
                         player.getInventory().addItem(GameItems.newArrow());
-                        player.sendMessage(/*Messages config messages.extra_arrow*/"hi");
+                        String extraArrow = MessagesConfig.get().getString("extra_arrow");
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', extraArrow));
                     }
                 }
 
