@@ -15,8 +15,13 @@ public class CommandManager implements CommandExecutor {
 
 
     public CommandManager(){
+
+        subcommands.add(new ConfirmDeleteCommand());
         subcommands.add(new CreateCommand());
+        subcommands.add(new DeclineDeleteCommand());
         subcommands.add(new DeleteCommand());
+        subcommands.add(new EndCommand());
+        subcommands.add(new GetQueueCommand());
         subcommands.add(new JoinCommand());
         subcommands.add(new PowerUpCommand());
         subcommands.add(new RoundCommand());
@@ -24,7 +29,6 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new StartCommand());
         subcommands.add(new StatsCommand());
         subcommands.add(new StopCommand());
-        subcommands.add(new GetQueueCommand());
     }
 
     @Override
@@ -38,6 +42,12 @@ public class CommandManager implements CommandExecutor {
                         getSubcommands().get(i).perform(player, args);
                     }
                 }
+            }else if (args.length == 0 || args[1] == "help"){
+                player.sendMessage("--------------------------------------");
+                for(int i = 0; i < getSubcommands().size(); i++){
+                    player.sendMessage(getSubcommands().get(i).getSyntax() + " - " + getSubcommands().get(i).getDescription());
+                }
+                player.sendMessage("--------------------------------------");
             }
         }
 

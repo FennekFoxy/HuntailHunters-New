@@ -35,7 +35,7 @@ public class JoinCommand extends SubCommand {
             String joinMessage = MessagesConfig.get().getString("join_message");
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', joinMessage));
         }else{
-            player.sendMessage("§cYou do not have permission to use this command.");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
     }
 }

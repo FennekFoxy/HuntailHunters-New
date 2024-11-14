@@ -1,6 +1,8 @@
 join_message: "&aYou have joined the queue for the next round of Huntail Hunter!"
 game_starting: "&aHuntail Hunters will be starting soon. Get ready!"
+make_room: "&aPlease make room in your inventory for the event items!"
 round_starting: "&aRound {round} has begun! Good luck everyone!"
+end_message: "&aThat was our final round! Congratulations to all our winners! Hope everyone had fun!"
 force_stop: "&cThe game has forcibly been stopped by staff!"
 power_ups_enabled: "&aPower ups are enabled for this round."
 power_ups_disabled: "&aPower ups are disabled for this round."

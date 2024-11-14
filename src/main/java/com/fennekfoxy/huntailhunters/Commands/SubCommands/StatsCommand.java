@@ -2,6 +2,7 @@ package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class StatsCommand extends SubCommand {
@@ -23,7 +24,7 @@ public class StatsCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if(player.hasPermission("huntailhunters.stats")){
-            if(args.length <= 1){
+            if(args.length == 1){
                 //pull own stats
             }else{
                 String playerName = args[1];
@@ -35,7 +36,7 @@ public class StatsCommand extends SubCommand {
                 }
             }
         }else{
-            player.sendMessage("§cYou do not have permission to use this command.");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
 
     }

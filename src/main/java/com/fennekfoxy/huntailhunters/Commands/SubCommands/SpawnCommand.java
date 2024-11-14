@@ -2,6 +2,7 @@ package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -25,7 +26,7 @@ public class SpawnCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if (player.hasPermission("huntailhunters.admin.spawn")){
             if (args.length < 5) {
-                player.sendMessage("§aUsage: /huntailhunters spawn <arena> <x> <y> <z>");
+                player.sendMessage(ChatColor.GREEN + getSyntax());
             }
             String arena = args[1];
             //check if arena already exists
@@ -35,12 +36,12 @@ public class SpawnCommand extends SubCommand {
                 double z = Double.parseDouble(args[4]);
                 Location newSpawn = new Location(Bukkit.getWorld("world"), x, y, z);
                 //save new spawnpoint to arena
-                player.sendMessage("§aSpawn point for arena " + arena + " set to (" + x + ", " + y + ", " + z + ").");
+                player.sendMessage(ChatColor.GREEN + arena + " set to (" + x + ", " + y + ", " + z + ").");
             }catch (NumberFormatException e) {
                 player.sendMessage("Coordinates must be a number.");
             }
         }else{
-            player.sendMessage("§cYou do not have permission to use this command.");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
     }
 }

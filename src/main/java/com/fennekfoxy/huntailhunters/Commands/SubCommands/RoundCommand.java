@@ -28,13 +28,18 @@ public class RoundCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if(player.hasPermission("huntailhunters.admin.round")){
+            if (args.length < 5) {
+                player.sendMessage(ChatColor.GREEN + getSyntax());
+            }
             gameManager.setActiveGame(true);
+
+            //check player inventory if they have any of the event items then give them what they dont have
 
             String roundStarting = MessagesConfig.get().getString("round_starting");
             roundStarting = roundStarting.replace("{round}", args[2]);
             gameManager.announceMessage(roundStarting);
         }else{
-            player.sendMessage("§cYou do not have permission to use this command.");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
 
     }

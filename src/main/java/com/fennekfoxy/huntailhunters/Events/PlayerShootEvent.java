@@ -3,6 +3,7 @@ package com.fennekfoxy.huntailhunters.Events;
 
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.AbstractArrow;
@@ -33,7 +34,7 @@ public class PlayerShootEvent implements Listener {
                     int foundValue = container.get(key, PersistentDataType.INTEGER);
                     if (foundValue == 2) {
                         e.setCancelled(true);
-                        player.sendMessage("§cYou can only use the special event arrows!");
+                        player.sendMessage(ChatColor.RED + "You can only use the special event arrows!");
                     } else {
                         if (e.getProjectile() instanceof Arrow) {
                             ((Arrow) e.getProjectile()).setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);

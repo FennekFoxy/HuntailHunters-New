@@ -2,6 +2,7 @@ package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
 import com.fennekfoxy.huntailhunters.GameManager;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class GetQueueCommand extends SubCommand {
             }
             player.sendMessage(playerNames.toString());
         }else{
-            player.sendMessage("§cYou do not have permission to use this command.");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
     }
 }

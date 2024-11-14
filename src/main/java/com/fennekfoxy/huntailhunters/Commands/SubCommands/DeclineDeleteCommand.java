@@ -28,9 +28,8 @@ public class DeclineDeleteCommand extends SubCommand {
             String decline = MessagesConfig.get().getString("delete_cancelled");
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', decline));
         }else{
-            player.sendMessage("§cYou do not have permission to use this command.");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
-        //send a message from message config saying arena deletion has been canceled
 
     }
 }

@@ -17,7 +17,7 @@ public class GameItems {
         ItemMeta meta = item.getItemMeta();
         NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 1);
-        meta.setDisplayName( "§5Event Bow");
+        meta.setDisplayName(ChatColor.DARK_PURPLE + "Event Bow");
         item.setItemMeta(meta);
         return item;
     }
@@ -26,7 +26,7 @@ public class GameItems {
         ItemMeta meta = item.getItemMeta();
         NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 2);
-        meta.setDisplayName("§5Event Arrow");
+        meta.setDisplayName(ChatColor.DARK_PURPLE + "Event Arrow");
         item.setItemMeta(meta);
         return item;
     }
@@ -35,7 +35,7 @@ public class GameItems {
         ItemMeta meta = item.getItemMeta();
         NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 3);
-        meta.setDisplayName("§5Event Sword");
+        meta.setDisplayName(ChatColor.DARK_PURPLE + "Event Sword");
         item.setItemMeta(meta);
         return item;
     }
@@ -44,9 +44,9 @@ public class GameItems {
         ItemMeta meta = item.getItemMeta();
         NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 4);
-        meta.setDisplayName("§6Power Up");
+        meta.setDisplayName(ChatColor.GOLD + "Power Up");
         List<String> lore = new ArrayList<>();
-        lore.add("§dThis power up grants a random bonus!");
+        lore.add(ChatColor.LIGHT_PURPLE + "This power up grants a random bonus!");
         meta.setLore(lore);
         item.setItemMeta(meta);
         return item;

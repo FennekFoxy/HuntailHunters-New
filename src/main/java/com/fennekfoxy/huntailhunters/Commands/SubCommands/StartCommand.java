@@ -4,6 +4,7 @@ import com.fennekfoxy.huntailhunters.Commands.SubCommand;
 import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -34,33 +35,25 @@ public class StartCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if(player.hasPermission("huntailhunters.admin.start")){
+            if (args.length < 2) {
+                player.sendMessage(ChatColor.GREEN + getSyntax());
+            }
             ArrayList<Player> queue = gameManager.getGameQueue();
             gameManager.announceMessage(MessagesConfig.get().getString("game_starting"));
             for (Player p : queue) {
                 if (p != null) {
                     // p.teleport(Arena spawn Point);
-                    //check inventory
+                    if(gameManager.countEmptySlots(p) <= 3){
 
-            /*
-            public int getEmptySlots(Player player) {
-                PlayerInventory inventory = player.getInventory();
-                ItemStack[] cont = inventory.getContents();
-                int i = 0;
-                for (ItemStack item : cont)
-                    if (item != null && item.getType() != Material.AIR) {
-                        i++;
+                        String makeRoomMessage = MessagesConfig.get().getString("make_room");
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', makeRoomMessage));
                     }
-                return 36 - i;
-            }
-                if (getEmptySlots(p) <= 7)){
-                 player.sendMessage("Please make room for the event items in your inventory");
-                }*/
                 }
             }
 
-            player.sendMessage("§aPlayers have been teleported into the arena.");
+            player.sendMessage(ChatColor.GREEN + "Players have been teleported into the arena.");
         }else{
-            player.sendMessage("§cYou do not have permission to use this command.");
+            player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
         //look into listening for a server done event or add a delay to the teleport
         //look through all inventorys of the players that are teleported and make sure they have at least 3 empty inventory slots

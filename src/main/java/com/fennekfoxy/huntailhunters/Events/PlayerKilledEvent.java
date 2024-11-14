@@ -4,7 +4,6 @@ import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,26 +25,26 @@ public class PlayerKilledEvent implements Listener {
         Player killed = e.getEntity();
         Player killer = killed.getKiller();
 
-        if(gameManager.isActiveGame()/* and both players are in the arean*/){
-            e.setDeathMessage(null);
-        }
-        if (killer != null && gameManager.isActiveGame()) {
-            if (gameManager.getQueueSize() != 1){
-                ItemStack weapon = killer.getInventory().getItemInMainHand();
-                ItemMeta meta = weapon.getItemMeta();
-                NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
-                PersistentDataContainer container = meta.getPersistentDataContainer();
-                if (container.has(key, PersistentDataType.INTEGER)){
-                    double foundValue = container.get(key, PersistentDataType.INTEGER);
-                    if (foundValue == 1 || foundValue == 3) {
-                        ItemStack arrow = GameItems.newArrow();
-                        killer.getInventory().addItem(arrow);
-                    }
-                }else if (gameManager.getQueueSize() == 1)
-                    gameManager.setActiveGame(false);
-                String winner = MessagesConfig.get().getString("winner_announcement");
-                winner = winner.replace("{winner}", killer.getDisplayName());
-                gameManager.announceMessage(MessagesConfig.get().getString(winner));
+        if(gameManager.isActiveGame()){
+            if (killer !=null/* and both players are in the arena*/){
+                e.setDeathMessage(null);
+                if (gameManager.getQueueSize() != 1){
+                    ItemStack weapon = killer.getInventory().getItemInMainHand();
+                    ItemMeta meta = weapon.getItemMeta();
+                    NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+                    PersistentDataContainer container = meta.getPersistentDataContainer();
+                    if (container.has(key, PersistentDataType.INTEGER)){
+                        double foundValue = container.get(key, PersistentDataType.INTEGER);
+                        if (foundValue == 1 || foundValue == 3) {
+                            ItemStack arrow = GameItems.newArrow();
+                            killer.getInventory().addItem(arrow);
+                        }
+                    }else if (gameManager.getQueueSize() == 1)
+                        gameManager.setActiveGame(false);
+                    String winner = MessagesConfig.get().getString("winner_announcement");
+                    winner = winner.replace("{winner}", killer.getDisplayName());
+                    gameManager.announceMessage(MessagesConfig.get().getString(winner));
+                }
             }
         }
     }
