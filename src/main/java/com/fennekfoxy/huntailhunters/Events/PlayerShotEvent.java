@@ -30,7 +30,7 @@ public class PlayerShotEvent implements Listener {
                 if (projectile.getType() == EntityType.ARROW) {
                     ItemStack item = new ItemStack(Material.ARROW, 1);
                     ItemMeta meta = item.getItemMeta();
-                    NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item id");
+                    NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
                     PersistentDataContainer container = meta.getPersistentDataContainer();
                     if (container.has(key, PersistentDataType.INTEGER)){
                     int foundValue = container.get(key, PersistentDataType.INTEGER);

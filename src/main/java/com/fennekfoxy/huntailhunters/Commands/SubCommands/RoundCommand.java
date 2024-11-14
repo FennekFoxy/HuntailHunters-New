@@ -29,7 +29,7 @@ public class RoundCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.round")){
+        if(player.hasPermission("huntailhunters.admin.round")){
             gameManager.setActiveGame(true);
             player.sendMessage("§a");
         }else{

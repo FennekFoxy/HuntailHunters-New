@@ -1,6 +1,7 @@
 package com.fennekfoxy.huntailhunters.Commands;
 
 import com.fennekfoxy.huntailhunters.Commands.SubCommands.*;
+import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,6 +24,7 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new StartCommand());
         subcommands.add(new StatsCommand());
         subcommands.add(new StopCommand());
+        subcommands.add(new GetQueueCommand());
     }
 
     @Override

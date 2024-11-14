@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class GameManager {
 
-    private boolean activeGame = false;
-    private ArrayList<Player> gameQueue = new ArrayList<Player>();
+    private static boolean activeGame = false;
+    private static ArrayList<Player> gameQueue = new ArrayList<Player>();
 
     public boolean isActiveGame(){
         return activeGame;

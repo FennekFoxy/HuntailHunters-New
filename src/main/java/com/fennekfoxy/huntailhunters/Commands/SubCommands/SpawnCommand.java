@@ -23,7 +23,7 @@ public class SpawnCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.spawn")){
+        if (player.hasPermission("huntailhunters.admin.spawn")){
             if (args.length < 5) {
                 player.sendMessage("§aUsage: /huntailhunters spawn <arena> <x> <y> <z>");
             }

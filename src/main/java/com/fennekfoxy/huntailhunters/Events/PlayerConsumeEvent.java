@@ -30,7 +30,7 @@ public class PlayerConsumeEvent implements Listener {
         if(gameManager.isActiveGame()/* && player is in the arena*/){
             ItemStack consumedItem = e.getItem();
             ItemMeta meta = consumedItem.getItemMeta();
-            NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item id");
+            NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
             PersistentDataContainer container = meta.getPersistentDataContainer();
             if (container.has(key, PersistentDataType.INTEGER)) {
                 int foundValue = container.get(key, PersistentDataType.INTEGER);
@@ -50,7 +50,7 @@ public class PlayerConsumeEvent implements Listener {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, duration, amplifier));
                         player.sendMessage(/*Messages config messages.jump_boost*/"hi");
                     } else if (number == 2) {
-                        player.getInventory().addItem(GameItems.eventArrow);
+                        player.getInventory().addItem(GameItems.newArrow());
                         player.sendMessage(/*Messages config messages.extra_arrow*/"hi");
                     }
                 }

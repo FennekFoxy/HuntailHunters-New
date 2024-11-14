@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -11,55 +12,43 @@ import java.util.List;
 
 public class GameItems {
 
-    public static ItemStack eventBow;
-    public static ItemStack eventArrow;
-    public static ItemStack eventSword;
-    public static ItemStack eventPowerUp;
-
-    public static void init() {
-        newBow();
-        newArrow();
-        newSword();
-        newPowerUp();
-    }
-
-    private static void newBow() {
+    public static ItemStack newBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item id");
+        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 1);
-        meta.setDisplayName("§5Event Bow");
+        meta.setDisplayName( "§5Event Bow");
         item.setItemMeta(meta);
-        eventBow = item;
+        return item;
     }
-    private static void newArrow() {
+    public static ItemStack newArrow() {
         ItemStack item = new ItemStack(Material.ARROW, 1);
         ItemMeta meta = item.getItemMeta();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item id");
+        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 2);
         meta.setDisplayName("§5Event Arrow");
         item.setItemMeta(meta);
-        eventArrow = item;
+        return item;
     }
-    private static void newSword() {
+    public static ItemStack newSword() {
         ItemStack item = new ItemStack(Material.IRON_SWORD, 1);
         ItemMeta meta = item.getItemMeta();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item id");
+        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 3);
         meta.setDisplayName("§5Event Sword");
         item.setItemMeta(meta);
-        eventSword = item;
+        return item;
     }
-    private static void newPowerUp(){
-        ItemStack item = new ItemStack(Material.POTION);
+    public static ItemStack newPowerUp(){
+        ItemStack item = new ItemStack(Material.POTION,1);
         ItemMeta meta = item.getItemMeta();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item id");
+        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 4);
         meta.setDisplayName("§6Power Up");
         List<String> lore = new ArrayList<>();
         lore.add("§dThis power up grants a random bonus!");
         meta.setLore(lore);
         item.setItemMeta(meta);
-        eventPowerUp = item;
+        return item;
     }
 }

@@ -21,7 +21,7 @@ public class StopCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.stop")){
+        if(player.hasPermission("huntailhunters.admin.stop")){
 
             player.sendMessage("§a");
         }else{

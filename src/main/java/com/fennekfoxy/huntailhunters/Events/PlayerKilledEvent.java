@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.Events;
 
+import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
 import org.bukkit.Material;
@@ -22,6 +23,7 @@ public class PlayerKilledEvent implements Listener {
     }
 
 
+
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player killed = e.getEntity();
@@ -38,7 +40,8 @@ public class PlayerKilledEvent implements Listener {
                 if (container.has(key, PersistentDataType.INTEGER)){
                     double foundValue = container.get(key, PersistentDataType.INTEGER);
                     if (foundValue == 1 || foundValue == 3) {
-                        //give killer a new event arrow
+                        ItemStack arrow = GameItems.newArrow();
+                        killer.getInventory().addItem(arrow);
                     }
             }
         }

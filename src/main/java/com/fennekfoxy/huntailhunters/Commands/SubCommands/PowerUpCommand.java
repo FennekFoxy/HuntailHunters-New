@@ -23,7 +23,7 @@ public class PowerUpCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.powerup")){
+        if(player.hasPermission("huntailhunters.admin.powerup")){
             String arena = args[1];
             // check if arena exists
 

@@ -3,25 +3,25 @@ package com.fennekfoxy.huntailhunters.Commands.SubCommands;
 import com.fennekfoxy.huntailhunters.Commands.SubCommand;
 import org.bukkit.entity.Player;
 
-public class DeleteCommand extends SubCommand {
+public class HelpCommand extends SubCommand {
     @Override
     public String getName() {
-        return "delete";
+        return "help";
     }
 
     @Override
     public String getDescription() {
-        return "Deletes a specified arena";
+        return "Get info on the Huntail Hunters Command";
     }
 
     @Override
     public String getSyntax() {
-        return "/huntailhunters delete <arena>";
+        return "/huntailhunters help";
     }
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.admin.delete")){
+        if(player.hasPermission("huntailhunters.admin.help")){
 
             player.sendMessage("§a");
         }else{

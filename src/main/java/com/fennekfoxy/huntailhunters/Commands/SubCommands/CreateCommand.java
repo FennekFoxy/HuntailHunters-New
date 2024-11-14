@@ -25,7 +25,7 @@ public class CreateCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.create")){
+        if(player.hasPermission("huntailhunters.admin.create")){
             try {
                 String name = args[7];
                 Location loc1 = new Location(Bukkit.getWorld("world"), + Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
