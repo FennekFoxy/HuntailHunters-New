@@ -15,6 +15,7 @@ public class PlayerLogoutEvent implements Listener {
         if (gameManager.isActiveGame()){
             Player player = e.getPlayer();
             gameManager.removePlayerFromQueue(player);
+            gameManager.removePlayerFromPlayed(player);
             gameManager.cleanUpInventory(player);
         }
     }

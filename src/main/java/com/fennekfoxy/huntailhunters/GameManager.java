@@ -30,6 +30,12 @@ public class GameManager {
         gameQueue.remove(player);
         playedGame.add(player);
     }
+    public void removePlayerFromPlayed(Player player){
+        playedGame.remove(player);
+    }
+    public void removePlayerFromGame(Player player){
+        gameQueue.remove(player);
+    }
     public boolean isPlayerInQueue(Player player){
         return gameQueue.contains(player);
     }

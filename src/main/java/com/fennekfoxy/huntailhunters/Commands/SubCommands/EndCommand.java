@@ -36,10 +36,13 @@ public class EndCommand extends SubCommand {
             ArrayList<Player> played = gameManager.getPlayedGame();
             for (Player p : queue) {
                 gameManager.cleanUpInventory(p);
+                gameManager.removePlayerFromGame(p);
             }
             for (Player p : played) {
                 gameManager.cleanUpInventory(p);
+                gameManager.removePlayerFromPlayed(p);
             }
+
 
             String endMessage = MessagesConfig.get().getString("end_message");
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', endMessage));
