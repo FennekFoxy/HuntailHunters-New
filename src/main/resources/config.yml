@@ -1,0 +1,7 @@
+power_ups:
+  speed:
+    duraction: 600
+    amplifier: 1
+  jump_boost:
+    duration: 600
+    amplifier: 1
