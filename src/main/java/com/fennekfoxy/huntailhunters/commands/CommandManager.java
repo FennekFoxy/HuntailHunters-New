@@ -1,6 +1,7 @@
-package com.fennekfoxy.huntailhunters.Commands;
+package com.fennekfoxy.huntailhunters.commands;
 
-import com.fennekfoxy.huntailhunters.Commands.SubCommands.*;
+import com.fennekfoxy.huntailhunters.commands.subcommands.*;
+import com.fennekfoxy.huntailhunters.GameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,28 +12,28 @@ import java.util.ArrayList;
 public class CommandManager implements CommandExecutor {
 
     private ArrayList<SubCommand> subcommands = new ArrayList<>();
+    private GameManager gameManager;
 
 
-    public CommandManager(){
 
+    public CommandManager(GameManager gameManager){
+        this.gameManager = gameManager;
         subcommands.add(new ConfirmDeleteCommand());
         subcommands.add(new CreateCommand());
         subcommands.add(new DeclineDeleteCommand());
         subcommands.add(new DeleteCommand());
-        subcommands.add(new EndCommand());
-        subcommands.add(new GetQueueCommand());
-        subcommands.add(new JoinCommand());
+        subcommands.add(new EndCommand(gameManager));
+        subcommands.add(new GetQueueCommand(gameManager));
+        subcommands.add(new JoinCommand(gameManager));
         subcommands.add(new PowerUpCommand());
-        subcommands.add(new RoundCommand());
+        subcommands.add(new RoundCommand(gameManager));
         subcommands.add(new SpawnCommand());
-        subcommands.add(new StartCommand());
-        subcommands.add(new StatsCommand());
-        subcommands.add(new StopCommand());
+        subcommands.add(new StartCommand(gameManager));
+        subcommands.add(new StatsCommand(gameManager));
+        subcommands.add(new StopCommand(gameManager));
     }
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
         if(sender instanceof Player){
             Player player = (Player) sender;
             if(args.length > 0){
@@ -49,12 +50,8 @@ public class CommandManager implements CommandExecutor {
                 player.sendMessage("--------------------------------------");
             }
         }
-
-
-
         return true;
     }
-
     public ArrayList<SubCommand> getSubcommands(){
         return subcommands;
     }

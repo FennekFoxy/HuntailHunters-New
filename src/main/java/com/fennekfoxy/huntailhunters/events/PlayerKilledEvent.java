@@ -1,10 +1,10 @@
-package com.fennekfoxy.huntailhunters.Events;
+package com.fennekfoxy.huntailhunters.events;
 
-import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.database.PlayerStats;
 import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
-import com.fennekfoxy.huntailhunters.Util.PlayerStats;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,11 +17,15 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.logging.Level;
 
 public class PlayerKilledEvent implements Listener {
 
-    GameManager gameManager = new GameManager();
+    private final GameManager gameManager;
 
+    public PlayerKilledEvent(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
@@ -58,19 +62,18 @@ public class PlayerKilledEvent implements Listener {
                     }
                     String winner = MessagesConfig.get().getString("winner_announcement");
                     winner = winner.replace("{winner}", killer.getDisplayName());
-                    try{
+                    try {
                         PlayerStats stats = HuntailHunters.getPlugin().getDatabase().findPlayerStatsByUUID(killer.getUniqueId().toString());
-                        if (stats == null){
+                        if (stats == null) {
                             stats = new PlayerStats(killer.getUniqueId().toString(), killer.getName(), 0);
-
                             stats.setWins(stats.getWins() + 1);
                             HuntailHunters.getPlugin().getDatabase().insertPlayerStats(stats);
-                        }else{
+                        } else {
                             stats.setWins(stats.getWins() + 1);
                             HuntailHunters.getPlugin().getDatabase().updatePlayerStats(stats);
                         }
-                    }catch (SQLException ex){
-                        ex.printStackTrace();
+                    } catch (SQLException ex) {
+                        HuntailHunters.getPlugin().getLogger().log(Level.SEVERE, "An error occurred while updating stats for player: " + killer.getName(), ex);
                     }
                     gameManager.announceMessage(winner);
                 }

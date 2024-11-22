@@ -1,8 +1,8 @@
-package com.fennekfoxy.huntailhunters.Commands.SubCommands;
+package com.fennekfoxy.huntailhunters.commands.subcommands;
 
-import com.fennekfoxy.huntailhunters.Commands.SubCommand;
-import com.fennekfoxy.huntailhunters.Configs.ArenasConfig;
-import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.commands.SubCommand;
+import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
+import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -24,21 +24,19 @@ public class ConfirmDeleteCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.admin.confirmdelete")){
-
+        if (player.hasPermission("huntailhunters.admin.confirmdelete")) {
             String name = args[1];
-            if (ArenasConfig.get().contains(name)){
+            if (ArenasConfig.get().contains(name)) {
                 ArenasConfig.get().set(name, null);
                 ArenasConfig.save();
                 String confirm = MessagesConfig.get().getString("delete_confirmed");
                 confirm = confirm.replace("{arena}", name);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', confirm));
-            }else{
+            } else {
                 player.sendMessage(ChatColor.RED + "Arena " + name + " does not exist.");
             }
-        }else{
+        } else {
             player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
-
     }
 }

@@ -1,14 +1,19 @@
-package com.fennekfoxy.huntailhunters.Commands.SubCommands;
+package com.fennekfoxy.huntailhunters.commands.subcommands;
 
-import com.fennekfoxy.huntailhunters.Commands.SubCommand;
-import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.commands.SubCommand;
+import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class JoinCommand extends SubCommand {
 
-    GameManager gameManager = new GameManager();
+    private final GameManager gameManager;
+
+    public JoinCommand(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
+
 
     @Override
     public String getName() {
@@ -27,12 +32,12 @@ public class JoinCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.join")){
+        if (player.hasPermission("huntailhunters.join")) {
             gameManager.addPlayerToQueue(player);
 
             String joinMessage = MessagesConfig.get().getString("join_message");
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', joinMessage));
-        }else{
+        } else {
             player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
     }

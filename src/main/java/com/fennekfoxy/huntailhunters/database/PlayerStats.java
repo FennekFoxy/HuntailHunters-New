@@ -1,4 +1,4 @@
-package com.fennekfoxy.huntailhunters.Util;
+package com.fennekfoxy.huntailhunters.database;
 
 public class PlayerStats {
 

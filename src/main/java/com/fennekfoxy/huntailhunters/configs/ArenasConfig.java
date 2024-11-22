@@ -1,11 +1,13 @@
-package com.fennekfoxy.huntailhunters.Configs;
+package com.fennekfoxy.huntailhunters.configs;
 
+import com.fennekfoxy.huntailhunters.HuntailHunters;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class ArenasConfig {
     private static File file;
@@ -17,23 +19,25 @@ public class ArenasConfig {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("File could not be created.");
+                HuntailHunters.getPlugin().getLogger().log(Level.SEVERE, "File could not be created", e);
             }
         }
         arenas = YamlConfiguration.loadConfiguration(file);
     }
-    public static FileConfiguration get(){
+
+    public static FileConfiguration get() {
         return arenas;
     }
-    public static void save(){
-        try{
+
+    public static void save() {
+        try {
             arenas.save(file);
         } catch (IOException e) {
-            System.out.println("File could not be saved");
+            HuntailHunters.getPlugin().getLogger().log(Level.SEVERE, "File could not be saved", e);
         }
     }
 
-    public static void reload(){
+    public static void reload() {
         arenas = YamlConfiguration.loadConfiguration(file);
     }
 }

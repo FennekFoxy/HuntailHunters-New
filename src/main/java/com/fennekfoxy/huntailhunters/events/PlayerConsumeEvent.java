@@ -1,6 +1,6 @@
-package com.fennekfoxy.huntailhunters.Events;
+package com.fennekfoxy.huntailhunters.events;
 
-import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
@@ -21,11 +21,15 @@ import java.util.Random;
 
 public class PlayerConsumeEvent implements Listener {
 
-    GameManager gameManager = new GameManager();
+    private final GameManager gameManager;
+
+    public PlayerConsumeEvent(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
 
     @EventHandler
     public void onPlayerConsume(PlayerItemConsumeEvent e) {
-        if(gameManager.isActiveGame() && gameManager.isPlayerInArena(e.getPlayer(), gameManager.getActiveArena())){
+        if (gameManager.isActiveGame() && gameManager.isPlayerInArena(e.getPlayer(), gameManager.getActiveArena())) {
             ItemStack consumedItem = e.getItem();
             ItemMeta meta = consumedItem.getItemMeta();
             NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");

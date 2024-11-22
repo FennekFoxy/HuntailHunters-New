@@ -81,5 +81,10 @@
             <artifactId>adventure-platform-bukkit</artifactId>
             <version>4.3.4</version>
         </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>6.2.1</version>
+        </dependency>
     </dependencies>
 </project>

@@ -1,4 +1,4 @@
-package com.fennekfoxy.huntailhunters.Commands;
+package com.fennekfoxy.huntailhunters.commands;
 
 import org.bukkit.entity.Player;
 

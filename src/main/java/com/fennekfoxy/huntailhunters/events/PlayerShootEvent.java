@@ -1,4 +1,4 @@
-package com.fennekfoxy.huntailhunters.Events;
+package com.fennekfoxy.huntailhunters.events;
 
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
@@ -17,12 +17,15 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class PlayerShootEvent implements Listener {
 
-    GameManager gameManager = new GameManager();
+    private final GameManager gameManager;
+
+    public PlayerShootEvent(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
 
     @EventHandler
     public void onPlayerShoot(EntityShootBowEvent e) {
-        if (e.getEntity() instanceof Player) {
-            Player player = (Player) e.getEntity();
+        if (e.getEntity() instanceof Player player) {
             if (gameManager.isActiveGame()) {
                 if (gameManager.isPlayerInArena(player, gameManager.getActiveArena())) {
                     ItemStack item = e.getConsumable();
@@ -32,8 +35,7 @@ public class PlayerShootEvent implements Listener {
                     if (container.has(key, PersistentDataType.INTEGER)) {
                         int foundValue = container.get(key, PersistentDataType.INTEGER);
                         if (foundValue == 2) {
-                            if (e.getProjectile() instanceof Arrow) {
-                                Arrow arrow = (Arrow) e.getProjectile();
+                            if (e.getProjectile() instanceof Arrow arrow) {
                                 PersistentDataContainer arrowContainer = arrow.getPersistentDataContainer();
                                 arrowContainer.set(key, PersistentDataType.INTEGER, 2);
                                 ((Arrow) e.getProjectile()).setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);

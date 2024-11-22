@@ -1,7 +1,7 @@
-package com.fennekfoxy.huntailhunters.Commands.SubCommands;
+package com.fennekfoxy.huntailhunters.commands.subcommands;
 
-import com.fennekfoxy.huntailhunters.Commands.SubCommand;
-import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.commands.SubCommand;
+import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -10,7 +10,11 @@ import java.util.HashSet;
 
 public class StopCommand extends SubCommand {
 
-    GameManager gameManager = new GameManager();
+    private final GameManager gameManager;
+
+    public StopCommand(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
 
     @Override
     public String getName() {
@@ -29,7 +33,7 @@ public class StopCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.admin.stop")) {
+        if (player.hasPermission("huntailhunters.admin.stop")) {
             if (args.length < 2) {
                 player.sendMessage(ChatColor.GREEN + getSyntax());
             } else {
@@ -44,7 +48,7 @@ public class StopCommand extends SubCommand {
                     gameManager.cleanUpInventory(p);
                 }
             }
-        }else{
+        } else {
             player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
     }

@@ -1,7 +1,7 @@
-package com.fennekfoxy.huntailhunters.Commands.SubCommands;
+package com.fennekfoxy.huntailhunters.commands.subcommands;
 
-import com.fennekfoxy.huntailhunters.Commands.SubCommand;
-import com.fennekfoxy.huntailhunters.Configs.ArenasConfig;
+import com.fennekfoxy.huntailhunters.commands.SubCommand;
+import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -31,10 +31,7 @@ public class SpawnCommand extends SubCommand {
                 String name = args[1];
                 if (ArenasConfig.get().contains(name)) {
                     try {
-                        Location spawn = new Location(player.getWorld(),
-                                Double.parseDouble(args[2]),
-                                Double.parseDouble(args[3]),
-                                Double.parseDouble(args[4]));
+                        Location spawn = new Location(player.getWorld(), Double.parseDouble(args[2]), Double.parseDouble(args[3]), Double.parseDouble(args[4]));
                         String coords = spawn.getX() + " " + spawn.getY() + " " + spawn.getZ();
                         ArenasConfig.get().set(name + ".Spawn", coords);
 
@@ -48,7 +45,7 @@ public class SpawnCommand extends SubCommand {
                     player.sendMessage(ChatColor.RED + "There is no arena with that name.");
                 }
             }
-        }else{
+        } else {
             player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
     }

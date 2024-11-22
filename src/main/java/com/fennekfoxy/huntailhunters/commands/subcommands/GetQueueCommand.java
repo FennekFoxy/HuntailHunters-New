@@ -1,6 +1,6 @@
-package com.fennekfoxy.huntailhunters.Commands.SubCommands;
+package com.fennekfoxy.huntailhunters.commands.subcommands;
 
-import com.fennekfoxy.huntailhunters.Commands.SubCommand;
+import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.GameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -9,7 +9,12 @@ import java.util.HashSet;
 
 public class GetQueueCommand extends SubCommand {
 
-    GameManager gameManager = new GameManager();
+    private final GameManager gameManager;
+
+    public GetQueueCommand(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
+
 
     @Override
     public String getName() {
@@ -32,7 +37,7 @@ public class GetQueueCommand extends SubCommand {
         int numOfPlayer = gameManager.getQueueSize();
         StringBuilder num = new StringBuilder("Number of players in queue: " + numOfPlayer);
         StringBuilder playerNames = new StringBuilder("Players in queue: ");
-        if(player.hasPermission("huntailhunters.admin.getqueue")){
+        if (player.hasPermission("huntailhunters.admin.getqueue")) {
             if (queue.isEmpty()) {
                 player.sendMessage("There are no players in the queue.");
                 return;
@@ -42,7 +47,7 @@ public class GetQueueCommand extends SubCommand {
             }
             player.sendMessage(num.toString());
             player.sendMessage(playerNames.toString());
-        }else{
+        } else {
             player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
     }

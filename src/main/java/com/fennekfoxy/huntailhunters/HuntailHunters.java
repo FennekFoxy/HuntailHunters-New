@@ -1,44 +1,49 @@
 package com.fennekfoxy.huntailhunters;
 
-import com.fennekfoxy.huntailhunters.Commands.CommandManager;
-import com.fennekfoxy.huntailhunters.Configs.ArenasConfig;
-import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
-import com.fennekfoxy.huntailhunters.Events.*;
-import com.fennekfoxy.huntailhunters.Util.Database;
+import com.fennekfoxy.huntailhunters.commands.CommandManager;
+import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
+import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.database.Database;
+import com.fennekfoxy.huntailhunters.database.PlayerStatsService;
+import com.fennekfoxy.huntailhunters.events.*;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 import java.sql.SQLException;
-
 
 public class HuntailHunters extends JavaPlugin {
 
+    private static HuntailHunters plugin;
     private BukkitAudiences adventure;
     private Database database;
+    private GameManager gameManager;
+    private PlayerStatsService playerStatsService;
+
+    public static HuntailHunters getPlugin() {
+        return plugin;
+    }
 
     public BukkitAudiences adventure() {
-        if(this.adventure == null) {
+        if (this.adventure == null) {
             throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
         }
         return this.adventure;
     }
 
-
-    private static HuntailHunters plugin;
-
     @Override
     public void onEnable() {
-        try {
-            this.database = new Database();
-            database.initializeDatabase();
-        }catch (SQLException e){
-            e.printStackTrace();
-            System.out.println("Unable to connect to database and create tables.");
-        }
-        plugin = this;
+                plugin = this;
+        this.database = new Database();
         this.adventure = BukkitAudiences.create(this);
+        this.playerStatsService = new PlayerStatsService();
+        gameManager = new GameManager(playerStatsService);
+        try {
+            this.database.initializeDatabase();
+        } catch (SQLException e) {
+            getLogger().severe("Error initializing database: " + e.getMessage());
+            getServer().getPluginManager().disablePlugin(this);
+        }
         ArenasConfig.setup();
         ArenasConfig.get().options().copyDefaults(true);
         ArenasConfig.save();
@@ -48,27 +53,26 @@ public class HuntailHunters extends JavaPlugin {
         MessagesConfig.save();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-        getServer().getPluginManager().registerEvents(new PlayerConsumeEvent(), this);
-        getServer().getPluginManager().registerEvents(new PlayerKilledEvent(), this);
-        getServer().getPluginManager().registerEvents(new PlayerLogoutEvent(), this);
-        getServer().getPluginManager().registerEvents(new PlayerShootEvent(), this);
-        getServer().getPluginManager().registerEvents(new PlayerShotEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerConsumeEvent(gameManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerKilledEvent(gameManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerLogoutEvent(gameManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerShootEvent(gameManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerShotEvent(gameManager), this);
 
-        getCommand("huntailhunters").setExecutor(new CommandManager());
+        getCommand("huntailhunters").setExecutor(new CommandManager(gameManager));
         getLogger().info(ChatColor.AQUA + "HuntailHunters (version " + getDescription().getVersion() + ") loaded successfully");
     }
 
     @Override
     public void onDisable() {
         getLogger().info(ChatColor.RED + "HuntailHunters (version " + getDescription().getVersion() + ") has been disabled");
-        if(this.adventure != null) {
+        if (this.adventure != null) {
             this.adventure.close();
             this.adventure = null;
         }
-    }
-
-    public static HuntailHunters getPlugin() {
-        return plugin;
+        if (database != null) {
+            database.close();
+        }
     }
 
     public Database getDatabase() {

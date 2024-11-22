@@ -12,6 +12,7 @@ import java.util.List;
 
 public class GameItems {
 
+    //Handles generating new Event Bows
     public static ItemStack newBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
@@ -21,6 +22,8 @@ public class GameItems {
         item.setItemMeta(meta);
         return item;
     }
+
+    //Handles generating new Event Arrow
     public static ItemStack newArrow() {
         ItemStack item = new ItemStack(Material.ARROW, 1);
         ItemMeta meta = item.getItemMeta();
@@ -30,6 +33,8 @@ public class GameItems {
         item.setItemMeta(meta);
         return item;
     }
+
+    //Handles generating new Event Swords
     public static ItemStack newSword() {
         ItemStack item = new ItemStack(Material.IRON_SWORD, 1);
         ItemMeta meta = item.getItemMeta();
@@ -39,8 +44,10 @@ public class GameItems {
         item.setItemMeta(meta);
         return item;
     }
-    public static ItemStack newPowerUp(){
-        ItemStack item = new ItemStack(Material.POTION,1);
+
+    //Handles generating new Event Powerups
+    public static ItemStack newPowerUp() {
+        ItemStack item = new ItemStack(Material.POTION, 1);
         ItemMeta meta = item.getItemMeta();
         NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 4);

@@ -1,9 +1,8 @@
 package com.fennekfoxy.huntailhunters;
 
-import com.fennekfoxy.huntailhunters.Configs.ArenasConfig;
-import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
-import com.fennekfoxy.huntailhunters.Util.Database;
-import com.fennekfoxy.huntailhunters.Util.PlayerStats;
+import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
+import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.database.PlayerStatsService;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -11,8 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,66 +19,85 @@ public class GameManager {
 
     private static boolean activeGame = false;
     private static String activeArena = null;
-    private static HashSet<Player> gameQueue = new HashSet<>();
-    private static HashSet<Player> playedGame = new HashSet<>();
-    Random random = new Random();
     public int taskId = -1;
+    Random random = new Random();
+    private final HashSet<Player> gameQueue = new HashSet<>();
+    private final HashSet<Player> playedGame = new HashSet<>();
+    private final PlayerStatsService playerStatsService;
 
-    public boolean isActiveGame(){
+    public GameManager(PlayerStatsService playerStatsService) {
+        this.playerStatsService = playerStatsService;
+    }
+
+    public boolean isActiveGame() {
         return activeGame;
     }
-    public String getActiveArena(){
-        return activeArena;
-    }
-    public void setActiveGame(boolean activeGame){
+
+    public void setActiveGame(boolean activeGame) {
         GameManager.activeGame = activeGame;
     }
-    public void setActiveArena(String activeArena){
+
+    public String getActiveArena() {
+        return activeArena;
+    }
+
+    public void setActiveArena(String activeArena) {
         GameManager.activeArena = activeArena;
     }
-    public void addPlayerToQueue(Player player){
-            gameQueue.add(player);
+
+    public void addPlayerToQueue(Player player) {
+        gameQueue.add(player);
     }
-    public void removePlayerFromQueue(Player player){
+
+    public void removePlayerFromQueue(Player player) {
         gameQueue.remove(player);
         playedGame.add(player);
     }
-    public void removePlayerFromPlayed(Player player){
+
+    public void removePlayerFromPlayed(Player player) {
         playedGame.remove(player);
     }
-    public void removePlayerFromGame(Player player){
+
+    public void removePlayerFromGame(Player player) {
         gameQueue.remove(player);
     }
-    public boolean isPlayerInQueue(Player player){
+
+    public boolean isPlayerInQueue(Player player) {
         return gameQueue.contains(player);
     }
-    public int getQueueSize(){
+
+    public int getQueueSize() {
         return gameQueue.size();
     }
+
     public HashSet<Player> getGameQueue() {
         return new HashSet<>(gameQueue);
     }
+
     public HashSet<Player> getPlayedGame() {
         return new HashSet<>(playedGame);
     }
+
     public void announceMessage(String message) {
         Bukkit.broadcastMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', message));
     }
-    public void cleanUpInventory(Player player){
+
+    public void cleanUpInventory(Player player) {
         Inventory inventory = player.getPlayer().getInventory();
         NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
 
-        for(ItemStack item : inventory.getContents()){
-            if (item != null && item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.INTEGER)){
+        for (ItemStack item : inventory.getContents()) {
+            if (item != null && item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
                 PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
-                int itemId = container.get(key,PersistentDataType.INTEGER);
+                int itemId = container.get(key, PersistentDataType.INTEGER);
 
-                if (itemId == 1 || itemId == 2 || itemId == 3 || itemId == 4){
+                if (itemId == 1 || itemId == 2 || itemId == 3 || itemId == 4) {
                     inventory.remove(item);
                 }
             }
         }
     }
+
     public int countEmptySlots(Player player) {
         int emptySlots = 0;
 
@@ -93,6 +109,7 @@ public class GameManager {
         }
         return emptySlots;
     }
+
     public void spawnPowerups(String name, Player player) {
         List<Location> powerupLocations = new ArrayList<>();
         if (ArenasConfig.get().contains(name + ".PowerUps")) {
@@ -134,14 +151,16 @@ public class GameManager {
             }, 0L, 300L).getTaskId();
         }
     }
+
     public void cancelPowerUpTask() {
         if (taskId != -1) {
             Bukkit.getScheduler().cancelTask(taskId);
             taskId = -1;
         }
     }
+
     public boolean isPlayerInArena(Player player, String name) {
-        
+
         if (!ArenasConfig.get().contains(name)) {
             return false;
         }
@@ -172,30 +191,19 @@ public class GameManager {
 
         Location playerLocation = player.getLocation();
 
-        if (playerLocation.getWorld().equals(world) &&
-                playerLocation.getX() >= minX && playerLocation.getX() <= maxX &&
-                playerLocation.getY() >= minY && playerLocation.getY() <= maxY &&
-                playerLocation.getZ() >= minZ && playerLocation.getZ() <= maxZ) {
-            return true;
-        }
-
-        return false;
+        return playerLocation.getWorld().equals(world) && playerLocation.getX() >= minX && playerLocation.getX() <= maxX && playerLocation.getY() >= minY && playerLocation.getY() <= maxY && playerLocation.getZ() >= minZ && playerLocation.getZ() <= maxZ;
     }
 
-   public void showPlayerStats(Player player){
-       try {
-           PlayerStats stats = HuntailHunters.getPlugin().getDatabase().findPlayerStatsByUUID(player.getUniqueId().toString());
-
-           if (stats == null){
-               player.sendMessage(ChatColor.RED + "No stats found for " + player.getName());
-           } else {
-               String statsMessage = ChatColor.GREEN + stats.getPlayerName() + "'s Stats:\n" +
-                       ChatColor.YELLOW + "Wins - " + stats.getWins();
-               player.sendMessage(statsMessage);
-           }
-       } catch (SQLException e) {
-           player.sendMessage(ChatColor.RED + "An error occurred while fetching stats.");
-           e.printStackTrace();
-       }
-   }
+    public void showPlayerStats(Player player) {
+        playerStatsService.getPlayerStats(player).thenAcceptAsync(stats -> {
+            Bukkit.getScheduler().runTask(HuntailHunters.getPlugin(), () -> {
+                if (stats == null) {
+                    player.sendMessage(ChatColor.RED + "No stats found for " + player.getName());
+                } else {
+                    String statsMessage = ChatColor.GREEN + stats.getPlayerName() + "'s Stats:\n" + ChatColor.YELLOW + "Wins - " + stats.getWins();
+                    player.sendMessage(statsMessage);
+                }
+            });
+        });
+    }
 }

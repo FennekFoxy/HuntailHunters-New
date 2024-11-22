@@ -1,7 +1,7 @@
-package com.fennekfoxy.huntailhunters.Commands.SubCommands;
+package com.fennekfoxy.huntailhunters.commands.subcommands;
 
-import com.fennekfoxy.huntailhunters.Commands.SubCommand;
-import com.fennekfoxy.huntailhunters.Configs.MessagesConfig;
+import com.fennekfoxy.huntailhunters.commands.SubCommand;
+import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -23,11 +23,11 @@ public class DeclineDeleteCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if(player.hasPermission("huntailhunters.admin.declinedelete")){
+        if (player.hasPermission("huntailhunters.admin.declinedelete")) {
 
             String decline = MessagesConfig.get().getString("delete_cancelled");
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', decline));
-        }else{
+        } else {
             player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }
 
