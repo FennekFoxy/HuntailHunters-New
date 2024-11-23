@@ -21,8 +21,8 @@ public class GameManager {
     private static String activeArena = null;
     public int taskId = -1;
     Random random = new Random();
-    private final HashSet<Player> gameQueue = new HashSet<>();
-    private final HashSet<Player> playedGame = new HashSet<>();
+    private final Set<Player> gameQueue = new HashSet<>();
+    private final Set<Player> playedGame = new HashSet<>();
     private final PlayerStatsService playerStatsService;
 
     public GameManager(PlayerStatsService playerStatsService) {
