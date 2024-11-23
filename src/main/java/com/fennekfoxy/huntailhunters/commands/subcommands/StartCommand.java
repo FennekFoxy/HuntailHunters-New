@@ -12,7 +12,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class StartCommand extends SubCommand {

@@ -16,7 +16,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 
