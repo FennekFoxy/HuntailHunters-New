@@ -15,6 +15,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class RoundCommand extends SubCommand {
 
@@ -48,7 +49,7 @@ public class RoundCommand extends SubCommand {
                 String name = args[1];
                 gameManager.setActiveGame(true);
                 gameManager.setActiveArena(name);
-                HashSet<Player> queue = gameManager.getGameQueue();
+                Set<Player> queue = gameManager.getGameQueue();
 
                 if (!ArenasConfig.get().contains(name)) {
                     player.sendMessage(ChatColor.RED + "There is no arena named " + name);

@@ -17,6 +17,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class PlayerKilledEvent implements Listener {
@@ -51,8 +52,8 @@ public class PlayerKilledEvent implements Listener {
                     }
                 } else if (gameManager.getQueueSize() == 1) {
                     gameManager.setActiveGame(false);
-                    HashSet<Player> queue = gameManager.getGameQueue();
-                    HashSet<Player> played = gameManager.getPlayedGame();
+                    Set<Player> queue = gameManager.getGameQueue();
+                    Set<Player> played = gameManager.getPlayedGame();
                     for (Player p : queue) {
                         gameManager.cleanUpInventory(p);
                     }

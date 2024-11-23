@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class StopCommand extends SubCommand {
 
@@ -39,8 +40,8 @@ public class StopCommand extends SubCommand {
             } else {
                 gameManager.setActiveGame(false);
                 gameManager.announceMessage(MessagesConfig.get().getString("force_stop"));
-                HashSet<Player> queue = gameManager.getGameQueue();
-                HashSet<Player> played = gameManager.getPlayedGame();
+                Set<Player> queue = gameManager.getGameQueue();
+                Set<Player> played = gameManager.getPlayedGame();
                 for (Player p : queue) {
                     gameManager.cleanUpInventory(p);
                 }

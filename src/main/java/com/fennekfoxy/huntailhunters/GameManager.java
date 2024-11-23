@@ -10,10 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GameManager {
 
@@ -21,8 +18,8 @@ public class GameManager {
     private static String activeArena = null;
     public int taskId = -1;
     Random random = new Random();
-    private final HashSet<Player> gameQueue = new HashSet<>();
-    private final HashSet<Player> playedGame = new HashSet<>();
+    private final Set<Player> gameQueue = new HashSet<>();
+    private final Set<Player> playedGame = new HashSet<>();
     private final PlayerStatsService playerStatsService;
 
     public GameManager(PlayerStatsService playerStatsService) {
@@ -70,11 +67,11 @@ public class GameManager {
         return gameQueue.size();
     }
 
-    public HashSet<Player> getGameQueue() {
+    public Set<Player> getGameQueue() {
         return new HashSet<>(gameQueue);
     }
 
-    public HashSet<Player> getPlayedGame() {
+    public Set<Player> getPlayedGame() {
         return new HashSet<>(playedGame);
     }
 

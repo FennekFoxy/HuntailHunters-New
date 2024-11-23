@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class GetQueueCommand extends SubCommand {
 
@@ -33,7 +34,7 @@ public class GetQueueCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        HashSet<Player> queue = gameManager.getGameQueue();
+        Set<Player> queue = gameManager.getGameQueue();
         int numOfPlayer = gameManager.getQueueSize();
         StringBuilder num = new StringBuilder("Number of players in queue: " + numOfPlayer);
         StringBuilder playerNames = new StringBuilder("Players in queue: ");

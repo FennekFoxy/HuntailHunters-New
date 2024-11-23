@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class StartCommand extends SubCommand {
 
@@ -43,7 +44,7 @@ public class StartCommand extends SubCommand {
             if (args.length < 2) {
                 player.sendMessage(ChatColor.GREEN + getSyntax());
             } else {
-                HashSet<Player> queue = gameManager.getGameQueue();
+                Set<Player> queue = gameManager.getGameQueue();
                 String name = args[1];
                 gameManager.announceMessage(MessagesConfig.get().getString("game_starting"));
                 if (!ArenasConfig.get().contains(name)) {
