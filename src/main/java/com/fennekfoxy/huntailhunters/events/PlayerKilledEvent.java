@@ -27,6 +27,10 @@ public class PlayerKilledEvent implements Listener {
         this.gameManager = gameManager;
     }
 
+    /*Checks if when a player is killed they were participating in the event 
+    handles giving players new arrows when they eliminate other players in the game
+    and cleaning the players inventorys to get ready for next round or end of event
+    also handels the checks for last players alive and adding to players win stats*/
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player killed = e.getEntity();
