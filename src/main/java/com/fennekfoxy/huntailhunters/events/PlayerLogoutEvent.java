@@ -14,6 +14,7 @@ public class PlayerLogoutEvent implements Listener {
         this.gameManager = gameManager;
     }
 
+    //If a player was participating in the game and they log out they are removed from the game as well as all game items removed from inventory
     @EventHandler
     public void onPlayerLogout(PlayerQuitEvent e) {
         if (gameManager.isActiveGame()) {
