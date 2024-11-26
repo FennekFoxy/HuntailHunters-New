@@ -23,6 +23,7 @@ public class PlayerShootEvent implements Listener {
         this.gameManager = gameManager;
     }
 
+    //Checks if when a player shoots a bow if there is an active game going and they are in the correct arena the bow can only shoot Event Arrow
     @EventHandler
     public void onPlayerShoot(EntityShootBowEvent e) {
         if (e.getEntity() instanceof Player player) {
