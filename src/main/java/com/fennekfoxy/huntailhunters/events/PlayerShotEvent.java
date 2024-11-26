@@ -16,6 +16,8 @@ public class PlayerShotEvent implements Listener {
         this.gameManager = gameManager;
     }
 
+    //Check while an active game is going and the player is shot with an arrow while in the correct arena
+    //if all checks are successfull sets the players health to 0 and removes them from the current players queue
     @EventHandler
     public void onPlayerShot(EntityDamageByEntityEvent e) {
         if (gameManager.isActiveGame()) {
