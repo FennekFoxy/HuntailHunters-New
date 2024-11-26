@@ -27,6 +27,7 @@ public class PlayerConsumeEvent implements Listener {
         this.gameManager = gameManager;
     }
 
+    //checks when a player drinks a powerup potion during the event and gives them a random effect out of the possible effects
     @EventHandler
     public void onPlayerConsume(PlayerItemConsumeEvent e) {
         if (gameManager.isActiveGame() && gameManager.isPlayerInArena(e.getPlayer(), gameManager.getActiveArena())) {
@@ -48,8 +49,8 @@ public class PlayerConsumeEvent implements Listener {
                         String speedBoost = MessagesConfig.get().getString("speed_boost");
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', speedBoost));
                     } else if (number == 1) {
-                        int duration = HuntailHunters.getPlugin().getConfig().getInt("power_ups.speed.duration", 600);
-                        int amplifier = HuntailHunters.getPlugin().getConfig().getInt("power_ups.speed.amplifier", 1);
+                        int duration = HuntailHunters.getPlugin().getConfig().getInt("power_ups.jump_boost.duration", 600);
+                        int amplifier = HuntailHunters.getPlugin().getConfig().getInt("power_ups.jump_boost.amplifier", 1);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, duration, amplifier));
                         String jumpBoost = MessagesConfig.get().getString("jump_boost");
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', jumpBoost));
