@@ -2,10 +2,6 @@ package com.fennekfoxy.huntailhunters.commands;
 
 public final class Permissions {
 
-    private Permissions(){
-        throw new UnsupportedOperationException("Cannot Instanttiate utility class");
-    }
-
     public static final String CONFIRM_DELETE_COMMAND = "huntailhunters.admin.confirmdelete";
     public static final String CREATE_COMMAND = "huntailhunters.admin.create";
     public static final String DECLINE_DELETE_COMMAND = "huntailhunters.admin.declinedelete";
