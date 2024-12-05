@@ -11,6 +11,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.*;
+import java.util.logging.Level;
 
 public class GameManager {
 
@@ -193,14 +194,15 @@ public class GameManager {
 
     public void showPlayerStats(Player player) {
         playerStatsService.getPlayerStats(player).thenAcceptAsync(stats -> {
-            Bukkit.getScheduler().runTask(HuntailHunters.getPlugin(), () -> {
-                if (stats == null) {
-                    player.sendMessage(ChatColor.RED + "No stats found for " + player.getName());
-                } else {
-                    String statsMessage = ChatColor.GREEN + stats.getPlayerName() + "'s Stats:\n" + ChatColor.YELLOW + "Wins - " + stats.getWins();
-                    player.sendMessage(statsMessage);
-                }
-            });
+            if (stats == null) {
+                player.sendMessage(ChatColor.RED + "No stats found for " + player.getName());
+            } else {
+                String statsMessage = ChatColor.GREEN + stats.getPlayerName() + "'s Stats:\n" + ChatColor.YELLOW + "Wins - " + stats.getWins();
+                player.sendMessage(statsMessage);
+            }
+        }).exceptionally(ex -> {
+            HuntailHunters.getPlugin().getLogger().log(Level.SEVERE, "Error fetching player stats", ex);
+            return null;
         });
     }
 }
