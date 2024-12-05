@@ -4,7 +4,6 @@ import com.fennekfoxy.huntailhunters.HuntailHunters;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.concurrent.CompletableFuture;
@@ -71,7 +70,7 @@ public class Database {
      */
     public void insertPlayerStats(PlayerStats stats) {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-            String query = "INSERT INTO player_stats (uuid, player_name, wins) VALUES (?, ?, ?)";
+            String query = "INSERT INTO player (uuid, playerName, wins) VALUES (?, ?, ?)";
             try (Connection connection = getConnection();
                  var statement = connection.prepareStatement(query)) {
 
@@ -94,7 +93,7 @@ public class Database {
      */
     public void updatePlayerStats(PlayerStats stats) {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-            String query = "UPDATE player_stats SET player_name = ?, wins = ? WHERE uuid = ?";
+            String query = "UPDATE player SET playerName = ?, wins = ? WHERE uuid = ?";
             try (Connection connection = getConnection();
                  var statement = connection.prepareStatement(query)) {
 
@@ -118,7 +117,7 @@ public class Database {
      */
     public CompletableFuture<PlayerStats> findPlayerStatsByUUID(String uuid) {
         return CompletableFuture.supplyAsync(() -> {
-            String query = "SELECT * FROM player_stats WHERE uuid = ?";
+            String query = "SELECT * FROM player WHERE uuid = ?";
             try (Connection connection = getConnection();
                  var statement = connection.prepareStatement(query)) {
 
@@ -128,7 +127,7 @@ public class Database {
                 if (resultSet.next()) {
                     return new PlayerStats(
                             uuid,
-                            resultSet.getString("player_name"),
+                            resultSet.getString("playerName"),
                             resultSet.getInt("wins")
                     );
                 } else {

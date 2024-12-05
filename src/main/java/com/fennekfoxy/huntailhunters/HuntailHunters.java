@@ -49,7 +49,7 @@ public class HuntailHunters extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new PlayerConsumeEvent(gameManager), this);
-        getServer().getPluginManager().registerEvents(new PlayerKilledEvent(gameManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerKilledEvent(gameManager, database), this);
         getServer().getPluginManager().registerEvents(new PlayerLogoutEvent(gameManager), this);
         getServer().getPluginManager().registerEvents(new PlayerShootEvent(gameManager), this);
         getServer().getPluginManager().registerEvents(new PlayerShotEvent(gameManager), this);

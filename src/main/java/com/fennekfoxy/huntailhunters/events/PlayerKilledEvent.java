@@ -24,7 +24,7 @@ public class PlayerKilledEvent implements Listener {
     private final GameManager gameManager;
     private final Database database;
 
-    public PlayerKilledEvent(GameManager gameManager) {
+    public PlayerKilledEvent(GameManager gameManager, Database database) {
         this.gameManager = gameManager;
         this.database = database;
     }
