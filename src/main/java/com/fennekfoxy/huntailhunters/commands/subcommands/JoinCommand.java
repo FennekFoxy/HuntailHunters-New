@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameManager;
@@ -32,7 +33,7 @@ public class JoinCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.join")) {
+        if (player.hasPermission(Permissions.JOIN_COMMAND)) {
             gameManager.addPlayerToQueue(player);
 
             String joinMessage = MessagesConfig.get().getString("join_message");

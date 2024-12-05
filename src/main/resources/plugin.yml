@@ -15,3 +15,5 @@ permissions:
     children:
       huntailhunters.join: true
       huntailhunters.stats: true
+
+

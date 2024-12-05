@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameManager;
@@ -33,7 +34,7 @@ public class EndCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.admin.end")) {
+        if (player.hasPermission(Permissions.END_COMMAND)) {
             if (args.length < 2) {
                 player.sendMessage(ChatColor.GREEN + getSyntax());
             } else {

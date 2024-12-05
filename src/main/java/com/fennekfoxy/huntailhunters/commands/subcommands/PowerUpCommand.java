@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
 import org.bukkit.ChatColor;
@@ -24,7 +25,7 @@ public class PowerUpCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.admin.powerup")) {
+        if (player.hasPermission(Permissions.POWERUP_COMMAND)) {
             if (args[1].equals("add")) {
                 if (args.length < 7) {
                     player.sendMessage(ChatColor.GREEN + "/huntailhunters powerup add <arena> <x> <y> <z> <powerup name>");

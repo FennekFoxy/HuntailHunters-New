@@ -81,7 +81,7 @@ public class GameManager {
 
     public void cleanUpInventory(Player player) {
         Inventory inventory = player.getPlayer().getInventory();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+        NamespacedKey key = GameItems.getItemIdKey();
 
         for (ItemStack item : inventory.getContents()) {
             if (item != null && item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {

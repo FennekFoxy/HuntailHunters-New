@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
 import org.bukkit.ChatColor;
@@ -26,7 +27,7 @@ public class CreateCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.admin.create")) {
+        if (player.hasPermission(Permissions.CREATE_COMMAND)) {
             if (args.length < 8) {
                 player.sendMessage(ChatColor.GREEN + getSyntax());
             } else {

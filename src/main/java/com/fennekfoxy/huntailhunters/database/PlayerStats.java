@@ -16,16 +16,8 @@ public class PlayerStats {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
-
     public String getPlayerName() {
         return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
     }
 
     public int getWins() {

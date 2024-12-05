@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
 import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
@@ -24,7 +25,7 @@ public class ConfirmDeleteCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.admin.confirmdelete")) {
+        if (player.hasPermission(Permissions.CONFIRM_DELETE_COMMAND)) {
             String name = args[1];
             if (ArenasConfig.get().contains(name)) {
                 ArenasConfig.get().set(name, null);

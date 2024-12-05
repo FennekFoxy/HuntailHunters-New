@@ -10,13 +10,23 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameItems {
+public final class GameItems {
+
+    public static final String ITEM_ID_KEY = "item_id";
+
+    private GameItems() {
+        throw new UnsupportedOperationException("Cannot instantiate utility class");
+    }
+
+    public static NamespacedKey getItemIdKey(){
+        return new NamespacedKey(HuntailHunters.getPlugin(), ITEM_ID_KEY);
+    }
 
     //Handles generating new Event Bows
     public static ItemStack newBow() {
         ItemStack item = new ItemStack(Material.BOW, 1);
         ItemMeta meta = item.getItemMeta();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+        NamespacedKey key = getItemIdKey();
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 1);
         meta.setDisplayName(ChatColor.DARK_PURPLE + "Event Bow");
         item.setItemMeta(meta);
@@ -27,7 +37,7 @@ public class GameItems {
     public static ItemStack newArrow() {
         ItemStack item = new ItemStack(Material.ARROW, 1);
         ItemMeta meta = item.getItemMeta();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+        NamespacedKey key = getItemIdKey();
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 2);
         meta.setDisplayName(ChatColor.DARK_PURPLE + "Event Arrow");
         item.setItemMeta(meta);
@@ -38,7 +48,7 @@ public class GameItems {
     public static ItemStack newSword() {
         ItemStack item = new ItemStack(Material.IRON_SWORD, 1);
         ItemMeta meta = item.getItemMeta();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+        NamespacedKey key = getItemIdKey();
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 3);
         meta.setDisplayName(ChatColor.DARK_PURPLE + "Event Sword");
         item.setItemMeta(meta);
@@ -49,7 +59,7 @@ public class GameItems {
     public static ItemStack newPowerUp() {
         ItemStack item = new ItemStack(Material.POTION, 1);
         ItemMeta meta = item.getItemMeta();
-        NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+        NamespacedKey key = getItemIdKey();
         meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, 4);
         meta.setDisplayName(ChatColor.GOLD + "Power Up");
         List<String> lore = new ArrayList<>();

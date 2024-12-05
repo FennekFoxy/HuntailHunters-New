@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
 import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
@@ -39,7 +40,7 @@ public class StartCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.admin.start")) {
+        if (player.hasPermission(Permissions.START_COMMAND)) {
             if (args.length < 2) {
                 player.sendMessage(ChatColor.GREEN + getSyntax());
             } else {

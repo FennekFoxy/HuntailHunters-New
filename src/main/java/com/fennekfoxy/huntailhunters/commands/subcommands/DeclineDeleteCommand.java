@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import org.bukkit.ChatColor;
@@ -23,7 +24,7 @@ public class DeclineDeleteCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.admin.declinedelete")) {
+        if (player.hasPermission(Permissions.DECLINE_DELETE_COMMAND)) {
 
             String decline = MessagesConfig.get().getString("delete_cancelled");
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', decline));

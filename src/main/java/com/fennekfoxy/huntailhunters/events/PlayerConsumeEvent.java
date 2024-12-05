@@ -32,7 +32,7 @@ public class PlayerConsumeEvent implements Listener {
         if (gameManager.isActiveGame() && gameManager.isPlayerInArena(e.getPlayer(), gameManager.getActiveArena())) {
             ItemStack consumedItem = e.getItem();
             ItemMeta meta = consumedItem.getItemMeta();
-            NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+            NamespacedKey key = GameItems.getItemIdKey();
             PersistentDataContainer container = meta.getPersistentDataContainer();
             if (container.has(key, PersistentDataType.INTEGER)) {
                 int foundValue = container.get(key, PersistentDataType.INTEGER);
@@ -48,8 +48,8 @@ public class PlayerConsumeEvent implements Listener {
                         String speedBoost = MessagesConfig.get().getString("speed_boost");
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', speedBoost));
                     } else if (number == 1) {
-                        int duration = HuntailHunters.getPlugin().getConfig().getInt("power_ups.speed.duration", 600);
-                        int amplifier = HuntailHunters.getPlugin().getConfig().getInt("power_ups.speed.amplifier", 1);
+                        int duration = HuntailHunters.getPlugin().getConfig().getInt("power_ups.jump_boost.duration", 600);
+                        int amplifier = HuntailHunters.getPlugin().getConfig().getInt("power_ups.jump_boost.amplifier", 1);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, duration, amplifier));
                         String jumpBoost = MessagesConfig.get().getString("jump_boost");
                         player.sendMessage(ChatColor.translateAlternateColorCodes('&', jumpBoost));

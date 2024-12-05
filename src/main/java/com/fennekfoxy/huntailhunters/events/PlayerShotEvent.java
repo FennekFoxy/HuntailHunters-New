@@ -1,9 +1,8 @@
 package com.fennekfoxy.huntailhunters.events;
 
 import com.fennekfoxy.huntailhunters.GameManager;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -15,6 +14,7 @@ public class PlayerShotEvent implements Listener {
     public PlayerShotEvent(GameManager gameManager) {
         this.gameManager = gameManager;
     }
+
 
     @EventHandler
     public void onPlayerShot(EntityDamageByEntityEvent e) {

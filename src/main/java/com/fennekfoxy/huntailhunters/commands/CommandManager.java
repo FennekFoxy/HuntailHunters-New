@@ -15,8 +15,6 @@ public class CommandManager implements CommandExecutor {
     private List<SubCommand> subcommands = new ArrayList<>();
     private GameManager gameManager;
 
-
-
     public CommandManager(GameManager gameManager){
         this.gameManager = gameManager;
         subcommands.add(new ConfirmDeleteCommand());

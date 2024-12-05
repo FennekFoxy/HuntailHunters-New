@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
 import net.kyori.adventure.text.Component;
@@ -26,7 +27,7 @@ public class DeleteCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.admin.delete")) {
+        if (player.hasPermission(Permissions.DELETE_COMMAND)) {
             if (args.length < 2) {
                 player.sendMessage(ChatColor.GREEN + getSyntax());
             } else {

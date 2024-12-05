@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.GameManager;
 import org.bukkit.Bukkit;
@@ -31,7 +32,7 @@ public class StatsCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.stats")) {
+        if (player.hasPermission(Permissions.STATS_COMMAND)) {
             if (args.length == 1) {
                 gameManager.showPlayerStats(player);
             } else {

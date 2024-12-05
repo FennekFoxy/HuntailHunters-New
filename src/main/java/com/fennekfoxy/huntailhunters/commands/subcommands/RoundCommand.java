@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.configs.ArenasConfig;
 import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
@@ -41,7 +42,7 @@ public class RoundCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (player.hasPermission("huntailhunters.admin.round")) {
+        if (player.hasPermission(Permissions.ROUND_COMMAND)) {
             if (args.length < 4) {
                 player.sendMessage(ChatColor.GREEN + getSyntax());
             } else {
@@ -60,7 +61,7 @@ public class RoundCommand extends SubCommand {
                             boolean hasEventSword = false;
 
                             Inventory inventory = player.getPlayer().getInventory();
-                            NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+                            NamespacedKey key = GameItems.getItemIdKey();
 
                             for (ItemStack item : inventory.getContents()) {
                                 if (item != null && item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {

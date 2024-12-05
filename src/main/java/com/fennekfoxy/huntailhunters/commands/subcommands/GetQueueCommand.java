@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.commands.subcommands;
 
+import com.fennekfoxy.huntailhunters.commands.Permissions;
 import com.fennekfoxy.huntailhunters.commands.SubCommand;
 import com.fennekfoxy.huntailhunters.GameManager;
 import org.bukkit.ChatColor;
@@ -37,7 +38,7 @@ public class GetQueueCommand extends SubCommand {
         int numOfPlayer = gameManager.getQueueSize();
         StringBuilder num = new StringBuilder("Number of players in queue: " + numOfPlayer);
         StringBuilder playerNames = new StringBuilder("Players in queue: ");
-        if (player.hasPermission("huntailhunters.admin.getqueue")) {
+        if (player.hasPermission(Permissions.GET_QUEUE_COMMAND)) {
             if (queue.isEmpty()) {
                 player.sendMessage("There are no players in the queue.");
                 return;

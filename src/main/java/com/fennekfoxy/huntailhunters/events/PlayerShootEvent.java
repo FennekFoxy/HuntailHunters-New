@@ -1,5 +1,6 @@
 package com.fennekfoxy.huntailhunters.events;
 
+import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
 import org.bukkit.ChatColor;
@@ -30,7 +31,7 @@ public class PlayerShootEvent implements Listener {
                 if (gameManager.isPlayerInArena(player, gameManager.getActiveArena())) {
                     ItemStack item = e.getConsumable();
                     ItemMeta meta = item.getItemMeta();
-                    NamespacedKey key = new NamespacedKey(HuntailHunters.getPlugin(), "item_id");
+                    NamespacedKey key = GameItems.getItemIdKey();
                     PersistentDataContainer container = meta.getPersistentDataContainer();
                     if (container.has(key, PersistentDataType.INTEGER)) {
                         int foundValue = container.get(key, PersistentDataType.INTEGER);

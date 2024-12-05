@@ -33,17 +33,12 @@ public class HuntailHunters extends JavaPlugin {
 
     @Override
     public void onEnable() {
-                plugin = this;
-        this.database = new Database();
+        plugin = this;
+        database = new Database(this);
+        database.initializeConnectionPool();
         this.adventure = BukkitAudiences.create(this);
-        this.playerStatsService = new PlayerStatsService();
+        this.playerStatsService = new PlayerStatsService(database);
         gameManager = new GameManager(playerStatsService);
-        try {
-            this.database.initializeDatabase();
-        } catch (SQLException e) {
-            getLogger().severe("Error initializing database: " + e.getMessage());
-            getServer().getPluginManager().disablePlugin(this);
-        }
         ArenasConfig.setup();
         ArenasConfig.get().options().copyDefaults(true);
         ArenasConfig.save();
@@ -71,11 +66,7 @@ public class HuntailHunters extends JavaPlugin {
             this.adventure = null;
         }
         if (database != null) {
-            database.close();
+            database.closeConnectionPool();
         }
-    }
-
-    public Database getDatabase() {
-        return database;
     }
 }
