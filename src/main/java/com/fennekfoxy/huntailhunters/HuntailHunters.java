@@ -36,6 +36,7 @@ public class HuntailHunters extends JavaPlugin {
         plugin = this;
         database = new Database(this);
         database.initializeConnectionPool();
+        database.setupDatabase();
         this.adventure = BukkitAudiences.create(this);
         this.playerStatsService = new PlayerStatsService(database);
         gameManager = new GameManager(playerStatsService);

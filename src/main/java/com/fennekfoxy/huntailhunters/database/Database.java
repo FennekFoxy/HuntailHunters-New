@@ -6,6 +6,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 
@@ -61,6 +62,31 @@ public class Database {
             throw new SQLException("DataSource is not initialized.");
         }
         return dataSource.getConnection();
+    }
+
+    /**
+     * Checks Database for table and creates one if none exists
+     *
+     * @throws SQLException If database could not be set up or configured.
+     */
+    public void setupDatabase() {
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            try (Connection connection = getConnection();
+                 Statement statement = connection.createStatement()) {
+
+                String createTableQuery = "CREATE TABLE IF NOT EXISTS player (" +
+                        "uuid VARCHAR(36) NOT NULL PRIMARY KEY, " +
+                        "playerName TEXT NOT NULL, " +
+                        "wins INT NOT NULL DEFAULT 0" +
+                        ");";
+
+                statement.executeUpdate(createTableQuery);
+                plugin.getLogger().info("Database setup complete. Table 'stats_tracker' ensured.");
+
+            } catch (SQLException e) {
+                plugin.getLogger().log(Level.SEVERE, "Error setting up database", e);
+            }
+        });
     }
 
     /**
