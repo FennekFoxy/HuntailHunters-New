@@ -3,6 +3,7 @@ package com.fennekfoxy.huntailhunters.database;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.bukkit.ChatColor;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -74,17 +75,17 @@ public class Database {
             try (Connection connection = getConnection();
                  Statement statement = connection.createStatement()) {
 
-                String createTableQuery = "CREATE TABLE IF NOT EXISTS player (" +
+                String createTableQuery = "CREATE TABLE IF NOT EXISTS player_stats (" +
                         "uuid VARCHAR(36) NOT NULL PRIMARY KEY, " +
                         "playerName TEXT NOT NULL, " +
                         "wins INT NOT NULL DEFAULT 0" +
                         ");";
 
                 statement.executeUpdate(createTableQuery);
-                plugin.getLogger().info("Database setup complete. Table 'stats_tracker' ensured.");
+                plugin.getLogger().info(ChatColor.AQUA + "Database setup complete. Table 'player_stats' ensured.");
 
             } catch (SQLException e) {
-                plugin.getLogger().log(Level.SEVERE, "Error setting up database", e);
+                plugin.getLogger().log(Level.SEVERE, ChatColor.RED + "Error setting up database", e);
             }
         });
     }
@@ -96,7 +97,7 @@ public class Database {
      */
     public void insertPlayerStats(PlayerStats stats) {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-            String query = "INSERT INTO player (uuid, playerName, wins) VALUES (?, ?, ?)";
+            String query = "INSERT INTO player_stats (uuid, playerName, wins) VALUES (?, ?, ?)";
             try (Connection connection = getConnection();
                  var statement = connection.prepareStatement(query)) {
 
@@ -107,7 +108,7 @@ public class Database {
 
                 plugin.getLogger().info("Inserted stats for player: " + stats.getPlayerName());
             } catch (SQLException e) {
-                plugin.getLogger().log(Level.SEVERE, "Error inserting player stats", e);
+                plugin.getLogger().log(Level.SEVERE, ChatColor.RED + "Error inserting player stats", e);
             }
         });
     }
@@ -119,7 +120,7 @@ public class Database {
      */
     public void updatePlayerStats(PlayerStats stats) {
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-            String query = "UPDATE player SET playerName = ?, wins = ? WHERE uuid = ?";
+            String query = "UPDATE player_stats SET playerName = ?, wins = ? WHERE uuid = ?";
             try (Connection connection = getConnection();
                  var statement = connection.prepareStatement(query)) {
 
@@ -130,7 +131,7 @@ public class Database {
 
                 plugin.getLogger().info("Updated stats for player: " + stats.getPlayerName());
             } catch (SQLException e) {
-                plugin.getLogger().log(Level.SEVERE, "Error updating player stats", e);
+                plugin.getLogger().log(Level.SEVERE, ChatColor.RED + "Error updating player stats", e);
             }
         });
     }
@@ -143,7 +144,7 @@ public class Database {
      */
     public CompletableFuture<PlayerStats> findPlayerStatsByUUID(String uuid) {
         return CompletableFuture.supplyAsync(() -> {
-            String query = "SELECT * FROM player WHERE uuid = ?";
+            String query = "SELECT * FROM player_stats WHERE uuid = ?";
             try (Connection connection = getConnection();
                  var statement = connection.prepareStatement(query)) {
 
@@ -161,7 +162,7 @@ public class Database {
                     return null;
                 }
             } catch (SQLException e) {
-                plugin.getLogger().log(Level.SEVERE, "Error fetching player stats", e);
+                plugin.getLogger().log(Level.SEVERE, ChatColor.RED + "Error fetching player stats", e);
                 return null;
             }
         });
