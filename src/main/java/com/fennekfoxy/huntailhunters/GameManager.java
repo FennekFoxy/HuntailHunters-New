@@ -192,13 +192,13 @@ public class GameManager {
         return playerLocation.getWorld().equals(world) && playerLocation.getX() >= minX && playerLocation.getX() <= maxX && playerLocation.getY() >= minY && playerLocation.getY() <= maxY && playerLocation.getZ() >= minZ && playerLocation.getZ() <= maxZ;
     }
 
-    public void showPlayerStats(Player player) {
+    public void showPlayerStats(Player player, Player sender) {
         playerStatsService.getPlayerStats(player).thenAcceptAsync(stats -> {
             if (stats == null) {
-                player.sendMessage(ChatColor.RED + "No stats found for " + player.getName());
+                sender.sendMessage(ChatColor.RED + "No stats found for " + player.getName());
             } else {
                 String statsMessage = ChatColor.GREEN + stats.getPlayerName() + "'s Stats:\n" + ChatColor.YELLOW + "Wins - " + stats.getWins();
-                player.sendMessage(statsMessage);
+                sender.sendMessage(statsMessage);
             }
         }).exceptionally(ex -> {
             HuntailHunters.getPlugin().getLogger().log(Level.SEVERE, "Error fetching player stats", ex);

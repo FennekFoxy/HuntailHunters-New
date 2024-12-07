@@ -34,14 +34,14 @@ public class StatsCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if (player.hasPermission(Permissions.STATS_COMMAND)) {
             if (args.length == 1) {
-                gameManager.showPlayerStats(player);
+                gameManager.showPlayerStats(player, player);
             } else {
                 String playerName = args[1];
                 Player target = Bukkit.getServer().getPlayerExact(playerName);
                 if (target == null) {
                     player.sendMessage(ChatColor.RED + "Player not found or player has not won any games yet.");
                 } else {
-                    gameManager.showPlayerStats(target);
+                    gameManager.showPlayerStats(target, player);
                 }
             }
         } else {

@@ -60,7 +60,7 @@ public class RoundCommand extends SubCommand {
                             boolean hasEventArrow = false;
                             boolean hasEventSword = false;
 
-                            Inventory inventory = player.getPlayer().getInventory();
+                            Inventory inventory = p.getPlayer().getInventory();
                             NamespacedKey key = GameItems.getItemIdKey();
 
                             for (ItemStack item : inventory.getContents()) {
