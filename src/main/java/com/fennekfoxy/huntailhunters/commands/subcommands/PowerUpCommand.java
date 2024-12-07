@@ -37,8 +37,6 @@ public class PowerUpCommand extends SubCommand {
                             String powerup_name = args[6];
                             String coords = powerupLoc.getX() + " " + powerupLoc.getY() + " " + powerupLoc.getZ();
                             ArenasConfig.get().set(name + ".PowerUps" + "." + powerup_name, coords);
-
-
                             ArenasConfig.save();
                             player.sendMessage(ChatColor.GREEN + powerup_name + " added to arena " + name + ".");
                         } catch (NumberFormatException e) {

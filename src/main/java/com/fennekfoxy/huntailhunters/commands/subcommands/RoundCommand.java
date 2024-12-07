@@ -7,6 +7,7 @@ import com.fennekfoxy.huntailhunters.configs.MessagesConfig;
 import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
@@ -54,42 +55,44 @@ public class RoundCommand extends SubCommand {
                 if (!ArenasConfig.get().contains(name)) {
                     player.sendMessage(ChatColor.RED + "There is no arena named " + name);
                 } else {
-                    for (Player p : queue) {
-                        if (p != null) {
-                            boolean hasEventBow = false;
-                            boolean hasEventArrow = false;
-                            boolean hasEventSword = false;
+                    Bukkit.getScheduler().runTask(HuntailHunters.getPlugin(), () -> {
+                        for (Player p : queue) {
+                            if (p != null) {
+                                boolean hasEventBow = false;
+                                boolean hasEventArrow = false;
+                                boolean hasEventSword = false;
 
-                            Inventory inventory = p.getPlayer().getInventory();
-                            NamespacedKey key = GameItems.getItemIdKey();
+                                Inventory inventory = p.getPlayer().getInventory();
+                                NamespacedKey key = GameItems.getItemIdKey();
 
-                            for (ItemStack item : inventory.getContents()) {
-                                if (item != null && item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
-                                    PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
-                                    int itemId = container.get(key, PersistentDataType.INTEGER);
+                                for (ItemStack item : inventory.getContents()) {
+                                    if (item != null && item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(key, PersistentDataType.INTEGER)) {
+                                        PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
+                                        int itemId = container.get(key, PersistentDataType.INTEGER);
 
-                                    if (itemId == 1) {
-                                        hasEventBow = true;
-                                    } else if (itemId == 2) {
-                                        hasEventArrow = true;
-                                    } else if (itemId == 3) {
-                                        hasEventSword = true;
-                                    } else if (itemId == 4) {
-                                        inventory.remove(item);
+                                        if (itemId == 1) {
+                                            hasEventBow = true;
+                                        } else if (itemId == 2) {
+                                            hasEventArrow = true;
+                                        } else if (itemId == 3) {
+                                            hasEventSword = true;
+                                        } else if (itemId == 4) {
+                                            inventory.remove(item);
+                                        }
                                     }
                                 }
-                            }
-                            if (!hasEventBow) {
-                                p.getInventory().addItem(GameItems.newBow());
-                            }
-                            if (!hasEventArrow) {
-                                p.getInventory().addItem(GameItems.newArrow());
-                            }
-                            if (!hasEventSword) {
-                                p.getInventory().addItem(GameItems.newSword());
+                                if (!hasEventBow) {
+                                    p.getInventory().addItem(GameItems.newBow());
+                                }
+                                if (!hasEventArrow) {
+                                    p.getInventory().addItem(GameItems.newArrow());
+                                }
+                                if (!hasEventSword) {
+                                    p.getInventory().addItem(GameItems.newSword());
+                                }
                             }
                         }
-                    }
+                    });
                 }
                 boolean powerUps = Boolean.parseBoolean(args[3]);
                 if (powerUps) {
