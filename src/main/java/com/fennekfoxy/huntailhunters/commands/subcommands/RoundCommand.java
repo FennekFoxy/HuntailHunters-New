@@ -70,14 +70,11 @@ public class RoundCommand extends SubCommand {
                                         PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
                                         int itemId = container.get(key, PersistentDataType.INTEGER);
 
-                                        if (itemId == 1) {
-                                            hasEventBow = true;
-                                        } else if (itemId == 2) {
-                                            hasEventArrow = true;
-                                        } else if (itemId == 3) {
-                                            hasEventSword = true;
-                                        } else if (itemId == 4) {
-                                            inventory.remove(item);
+                                        switch (itemId) {
+                                            case 1 -> hasEventBow = true;
+                                            case 2 -> hasEventArrow = true;
+                                            case 3 -> hasEventSword = true;
+                                            case 4 -> inventory.remove(item);
                                         }
                                     }
                                 }
