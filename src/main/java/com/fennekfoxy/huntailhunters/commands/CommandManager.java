@@ -23,6 +23,7 @@ public class CommandManager implements CommandExecutor {
         subcommands.add(new DeleteCommand());
         subcommands.add(new EndCommand(gameManager));
         subcommands.add(new GetQueueCommand(gameManager));
+        subcommands.add(new HubCommand());
         subcommands.add(new JoinCommand(gameManager));
         subcommands.add(new PowerUpCommand());
         subcommands.add(new RoundCommand(gameManager));

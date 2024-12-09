@@ -6,7 +6,10 @@ import com.fennekfoxy.huntailhunters.database.PlayerStats;
 import com.fennekfoxy.huntailhunters.GameItems;
 import com.fennekfoxy.huntailhunters.GameManager;
 import com.fennekfoxy.huntailhunters.HuntailHunters;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -52,6 +55,13 @@ public class PlayerKilledEvent implements Listener {
                         }
                     }
                 } else if (gameManager.getQueueSize() == 1) {
+                    String worldName = HuntailHunters.getPlugin().getConfig().getString("Hub.world");
+                    double x = HuntailHunters.getPlugin().getConfig().getInt("Hub.x");
+                    double y = HuntailHunters.getPlugin().getConfig().getInt("Hub.y");
+                    double z = HuntailHunters.getPlugin().getConfig().getInt("Hub.z");
+                    World world = Bukkit.getWorld(worldName);
+                    Location hub = new Location(world, x, y, z);
+                    killer.teleport(hub);
                     gameManager.setActiveGame(false);
                     Set<Player> queue = gameManager.getGameQueue();
                     Set<Player> played = gameManager.getPlayedGame();
