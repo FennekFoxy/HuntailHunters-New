@@ -34,10 +34,14 @@ public class JoinCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if (player.hasPermission(Permissions.JOIN_COMMAND)) {
-            gameManager.addPlayerToQueue(player);
+            if (gameManager.isPlayerInQueue(player) || gameManager.isPlayerInPlayed(player)){
+                player.sendMessage(ChatColor.RED + "You are already queued for the game.");
+            }else{
+                gameManager.addPlayerToQueue(player);
 
-            String joinMessage = MessagesConfig.get().getString("join_message");
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', joinMessage));
+                String joinMessage = MessagesConfig.get().getString("join_message");
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', joinMessage));
+            };
         } else {
             player.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
         }

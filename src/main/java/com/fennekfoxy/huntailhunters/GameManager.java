@@ -64,6 +64,8 @@ public class GameManager {
         return gameQueue.contains(player);
     }
 
+    public boolean isPlayerInPlayed(Player player) {return playedGame.contains(player);}
+
     public int getQueueSize() {
         return gameQueue.size();
     }
